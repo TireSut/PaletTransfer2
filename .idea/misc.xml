@@ -1,0 +1,44 @@
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/drawable/cell_shape.xml" value="0.37083333333333335" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/drawable/cell_shape_focus.xml" value="0.37083333333333335" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/drawable/effect.xml" value="0.21770833333333334" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/drawable/textview.xml" value="0.289" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/drawable/textview2.xml" value="0.21481481481481482" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/drawable/textview_border.xml" value="0.2895" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout-v14/depo_secim_depo.xml" value="0.25" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/activity_ana_depo.xml" value="0.24171539961013644" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/activity_depo_stok_durum.xml" value="0.4309296264118158" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/activity_deposayim.xml" value="0.31521739130434784" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/activity_depostokyonetim.xml" value="0.2" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/activity_main.xml" value="0.37349397590361444" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/anadeporecyecler.xml" value="0.3115942028985507" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/depo_secim.xml" value="0.3546875" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/depo_secim_cikis.xml" value="0.23697916666666666" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/depo_secim_depo.xml" value="0.3546875" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/depo_secim_giris.xml" value="0.264" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/deposayimliste.xml" value="0.5" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/deposayimrecyecler.xml" value="0.3016304347826087" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/deposayimsil.xml" value="0.5" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/depostokmikcard.xml" value="0.33" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/palet_transfer.xml" value="0.25" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/palet_transfer_cikis.xml" value="0.19739583333333333" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/palet_transfer_depo.xml" value="0.19739583333333333" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/palet_transfer_giris.xml" value="0.5" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/transfer.xml" value="0.3546875" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/layout/urun_view.xml" value="0.23697916666666666" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3828125" />
+        <entry key="..\:/gelistirme/PaletTransfer/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3828125" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

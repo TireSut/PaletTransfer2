@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/anasayfa"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp">
+
+        <LinearLayout
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center">
+
+            <ImageView
+
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:background="@drawable/logo1" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="3dp">
+
+            <ImageButton
+                android:id="@+id/infobtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/infooff"
+                android:clickable="true"
+                android:foreground="@drawable/effect" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_margin="3dp"
+            android:layout_alignParentRight="true">
+
+            <ImageButton
+                android:id="@+id/exitbtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/close"
+                android:clickable="true"
+                android:foreground="@drawable/effect" />
+
+        </RelativeLayout>
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/rl1"
+            android:layout_below="@+id/logo"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="2dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <GridLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="9"
+                    android:columnCount="9"
+                    android:rowCount="8">
+
+
+                    <TextView
+                        android:id="@+id/miktarlbl"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:layout_columnSpan="3"
+                        android:layout_columnWeight="3"
+                        android:text="Miktar  : "
+                        android:textAlignment="textEnd"
+                        android:textColor="@color/black"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+
+
+                    <EditText
+                        android:id="@+id/miktarbox"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_row="0"
+                        android:layout_column="3"
+                        android:layout_columnSpan="3"
+                        android:layout_columnWeight="3"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/cell_shape"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:inputType="numberDecimal"
+                        android:textAlignment="textEnd"
+                        android:textSize="25dp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+
+
+                    <EditText
+                        android:id="@+id/paletBarkod"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_row="1"
+                        android:layout_column="0"
+                        android:layout_columnSpan="6"
+                        android:layout_columnWeight="6"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/cell_shape"
+                        android:clickable="true"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusableInTouchMode="true"
+                        android:foreground="@drawable/effect"
+                        android:gravity="start"
+                        android:inputType="number|phone"
+                        android:textAlignment="textStart"
+                        android:textSize="25dp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/paletAraBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_row="1"
+                        android:layout_column="6"
+                        android:layout_columnWeight="1"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/ara_btn"
+                        android:clickable="true"
+                        android:foreground="@drawable/effect"></ImageButton>
+
+                    <ImageButton
+                        android:id="@+id/paletTaramaBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_row="1"
+                        android:layout_column="7"
+                        android:layout_columnWeight="1"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginRight="3dp"
+                        android:background="@drawable/tara_btn"
+                        android:clickable="true"
+                        android:foreground="@drawable/effect"></ImageButton>
+
+
+                    <Switch
+                        android:id="@+id/tursec"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_row="0"
+                        android:layout_column="6"
+                        android:layout_columnSpan="2"
+                        android:layout_columnWeight="2"
+                        android:layout_marginBottom="10dp"
+                        android:checked="false"
+                        android:text="Palet"
+                        android:textAlignment="textEnd"
+                        android:textOff="Palet"
+                        android:textOn="Ürün"
+                        android:textSize="20dp"
+                        tools:checked="false" />
+
+
+
+                </GridLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvUrunListe"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginBottom="2dp">
+
+                <RelativeLayout
+                    android:id="@+id/depoanims"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:rowCount="1">
+
+
+                    <ImageView
+                        android:id="@+id/kaynakdepoimg"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/sirket" />
+
+                    <ImageView
+                        android:id="@+id/hedefdepoimg"
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/sirket"
+                        android:backgroundTint="@color/kirmizi" />
+
+                    <ImageView
+                        android:id="@+id/paletimg"
+                        android:layout_width="70dp"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="38dp"
+                        android:layout_marginTop="76dp"
+                        android:background="@drawable/palet" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/tarihlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tarih"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+
+                    android:background="@drawable/textview2"
+                    android:gravity="center"
+                    android:text="Tarih"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            tools:ignore="NotSibling">
+
+            <TextView
+                android:id="@+id/DEPOTXT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/STOKYERI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/TESISADITXT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="55dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+</LinearLayout>
