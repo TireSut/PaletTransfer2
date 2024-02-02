@@ -165,7 +165,6 @@ public class transfer extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         nam.clear();
-        PTUR = "P";
         info = 0;
         if (ATUR.equals("true")) {
             PTUR = "S";
@@ -312,7 +311,7 @@ public class transfer extends AppCompatActivity {
             sw_tursec.setText(sw_tursec.getTextOn());
             lbl_miktar.setVisibility(View.VISIBLE);
             edt_miktar.setVisibility(View.VISIBLE);
-            edt_miktar.setText(barkodTxt.substring(7, 9) + "." + barkodTxt.substring(9, 11));
+            edt_miktar.setText(barkodTxt.substring(12, 13) +barkodTxt.substring(7, 9) + "." + barkodTxt.substring(9, 11));
             barkodTxt = barkodTxt.substring(0, 7);
         }
         double mik = Double.parseDouble("0" + edt_miktar.getText().toString());
