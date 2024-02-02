@@ -56,24 +56,25 @@ import javax.xml.xpath.XPathFactory;
 
 public class transfer extends AppCompatActivity {
     final Context context = this;
-    public String AYARGRUP,COMPANY,PLANT,PLANTTXT,WAREHOUSE,STOCKPLACE;
-    public String TPLANT,TPLANTTXT,TWAREHOUSE,TSTOCKPLACE,YON,HRKNUM,PTUR,TARIH,BILTEKPARAM,ATUR;
+    public String AYARGRUP, COMPANY, PLANT, PLANTTXT, WAREHOUSE, STOCKPLACE;
+    public String TPLANT, TPLANTTXT, TWAREHOUSE, TSTOCKPLACE, YON, HRKNUM, PTUR, TARIH, BILTEKPARAM, ATUR;
     int info;
-    String etesis,edepo,esp;
-    TextView tv_tesisadi,tv_depo,tv_stokteri,lbl_miktar,tv_tarih;
-    EditText edt_miktar,edt_barkod;
+    String etesis, edepo, esp;
+    TextView tv_tesisadi, tv_depo, tv_stokteri, lbl_miktar, tv_tarih;
+    EditText edt_miktar, edt_barkod;
     public String barkodTxt;
-    ImageButton btn_tara,btn_ara,btn_info,btn_exit;
-    ImageView img_palet,img_kaynakdepo,img_hedefdepo;
+    ImageButton btn_tara, btn_ara, btn_info, btn_exit;
+    ImageView img_palet, img_kaynakdepo, img_hedefdepo;
     TranslateAnimation animation = null;
     RecyclerView recyclerView;
     public ArrayList<urunlist> nam = new ArrayList<>();
     public ArrayList<urunlist> urn = new ArrayList<>();
-    public urunAdaptor adapter ;
+    public urunAdaptor adapter;
     Switch sw_tursec;
     Bundle g;
-    VeriTabani vt =new VeriTabani();
-    canias ias =new canias();
+    VeriTabani vt = new VeriTabani();
+    canias ias = new canias();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -83,7 +84,6 @@ public class transfer extends AppCompatActivity {
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.transfer);
-
 
 
         } catch (Exception e) {
@@ -121,7 +121,7 @@ public class transfer extends AppCompatActivity {
             }
         }
 
-        btn_exit=findViewById(R.id.exitbtn);
+        btn_exit = findViewById(R.id.exitbtn);
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,7 +129,6 @@ public class transfer extends AppCompatActivity {
                 System.exit(0);
             }
         });
-
 
 
         if (AYARGRUP.equals("")) {
@@ -145,14 +144,20 @@ public class transfer extends AppCompatActivity {
         edt_barkod = findViewById(R.id.paletBarkod);
         edt_barkod.setInputType(InputType.TYPE_NULL);
         edt_miktar = findViewById(R.id.miktarbox);
+        edt_miktar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                edt_miktar.setText(edt_miktar.getText().toString().replaceAll(",","."));
+            }
+        });
         lbl_miktar = findViewById(R.id.miktarlbl);
         img_palet = findViewById(R.id.paletimg);
-        img_hedefdepo=findViewById(R.id.hedefdepoimg);
-        img_kaynakdepo=findViewById(R.id.kaynakdepoimg);
+        img_hedefdepo = findViewById(R.id.hedefdepoimg);
+        img_kaynakdepo = findViewById(R.id.kaynakdepoimg);
         tv_tesisadi.setText(PLANT + "-" + PLANTTXT);
         tv_depo.setText("Depo: [" + WAREHOUSE + "]  /  [" + TWAREHOUSE + "]");
         tv_stokteri.setText("Stok Yeri: [" + STOCKPLACE + "]  /  [" + TSTOCKPLACE + "]");
-tv_tarih.setText(TARIH);
+        tv_tarih.setText(TARIH);
         edt_barkod.setInputType(InputType.TYPE_CLASS_NUMBER);
         // RecyclerView tanımları
         recyclerView = (RecyclerView) findViewById(R.id.rvUrunListe);
@@ -160,16 +165,16 @@ tv_tarih.setText(TARIH);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         nam.clear();
-        PTUR="P";
-        info=0;
-        if (ATUR.equals("true")){
-            PTUR="S";
+        PTUR = "P";
+        info = 0;
+        if (ATUR.equals("true")) {
+            PTUR = "S";
             sw_tursec.setChecked(true);
             sw_tursec.setText(sw_tursec.getTextOn());
             lbl_miktar.setVisibility(View.VISIBLE);
             edt_miktar.setVisibility(View.VISIBLE);
         } else {
-            PTUR="P";
+            PTUR = "P";
             sw_tursec.setChecked(false);
             sw_tursec.setText(sw_tursec.getTextOff());
             lbl_miktar.setVisibility(View.INVISIBLE);
@@ -180,12 +185,12 @@ tv_tarih.setText(TARIH);
         sw_tursec.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (sw_tursec.isChecked()) {
-                    PTUR="S";
+                    PTUR = "S";
                     sw_tursec.setText(sw_tursec.getTextOn());
                     lbl_miktar.setVisibility(View.VISIBLE);
                     edt_miktar.setVisibility(View.VISIBLE);
                 } else {
-                    PTUR="P";
+                    PTUR = "P";
                     sw_tursec.setText(sw_tursec.getTextOff());
                     lbl_miktar.setVisibility(View.INVISIBLE);
                     edt_miktar.setVisibility(View.INVISIBLE);
@@ -233,13 +238,13 @@ tv_tarih.setText(TARIH);
             }
         });
 
-        btn_info =  findViewById(R.id.infobtn);
+        btn_info = findViewById(R.id.infobtn);
         btn_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (info==0){
-                    info=1;
-                    barkodTxt="";
+                if (info == 0) {
+                    info = 1;
+                    barkodTxt = "";
                     edt_barkod.setText(barkodTxt);
                     sw_tursec.setChecked(false);
                     sw_tursec.setVisibility(View.INVISIBLE);
@@ -250,15 +255,15 @@ tv_tarih.setText(TARIH);
                     img_kaynakdepo.setVisibility(View.INVISIBLE);
                     nam.clear();
                     adapter.notifyDataSetChanged();
-                    etesis=tv_tesisadi.getText().toString();
-                    edepo=tv_depo.getText().toString();
-                    esp=tv_stokteri.getText().toString();
-                    tv_tesisadi .setText("");
+                    etesis = tv_tesisadi.getText().toString();
+                    edepo = tv_depo.getText().toString();
+                    esp = tv_stokteri.getText().toString();
+                    tv_tesisadi.setText("");
                     tv_depo.setText("");
                     tv_stokteri.setText("");
-                }  else {
-                    info=0;
-                    barkodTxt="";
+                } else {
+                    info = 0;
+                    barkodTxt = "";
                     edt_barkod.setText(barkodTxt);
                     sw_tursec.setVisibility(View.VISIBLE);
                     btn_info.setBackgroundResource(R.drawable.infooff);
@@ -268,7 +273,7 @@ tv_tarih.setText(TARIH);
                     img_kaynakdepo.setVisibility(View.VISIBLE);
                     nam.clear();
                     adapter.notifyDataSetChanged();
-                    tv_tesisadi .setText(etesis);
+                    tv_tesisadi.setText(etesis);
                     tv_depo.setText(edepo);
                     tv_stokteri.setText(esp);
                 }
@@ -276,6 +281,7 @@ tv_tarih.setText(TARIH);
         });
 
     }
+
     //*************************************************************************
     @Override
 
@@ -289,9 +295,10 @@ tv_tarih.setText(TARIH);
                 paletbul();
             }
         } catch (Exception e) {
-            String hatatxt=e.toString();
+            String hatatxt = e.toString();
         }
     }
+
     protected void paletbul() {
         img_palet.clearAnimation();
         // getUrunListe (String barkod, String comp,String pla,String wh, String sp,Boolean tur,int miktar)
@@ -299,31 +306,31 @@ tv_tarih.setText(TARIH);
         if (barkodTxt.equals("")) {
             return;
         }
-        if (barkodTxt.substring(0,2).equals("27") || barkodTxt.substring(0,2).equals("28")) {
-            PTUR="S";
+        if (barkodTxt.substring(0, 2).equals("27") || barkodTxt.substring(0, 2).equals("28")) {
+            PTUR = "S";
             sw_tursec.setChecked(true);
             sw_tursec.setText(sw_tursec.getTextOn());
             lbl_miktar.setVisibility(View.VISIBLE);
             edt_miktar.setVisibility(View.VISIBLE);
-            edt_miktar.setText(barkodTxt.substring(7,9)+"."+barkodTxt.substring(9,11));
-            barkodTxt=barkodTxt.substring(0,7);
+            edt_miktar.setText(barkodTxt.substring(7, 9) + "." + barkodTxt.substring(9, 11));
+            barkodTxt = barkodTxt.substring(0, 7);
         }
         double mik = Double.parseDouble("0" + edt_miktar.getText().toString());
         if (sw_tursec.isChecked() && mik <= 0.0) {
-            hata_dlg("Palet / Ürün Bulma Hatası", "Miktar (0)Sıfır olamaz.",true);
+            hata_dlg("Palet / Ürün Bulma Hatası", "Miktar (0)Sıfır olamaz.", true);
             return;
         }
         nam.clear();
-        if (info==0) {
+        if (info == 0) {
             urn = vt.getUrunListe(barkodTxt, COMPANY, PLANT, WAREHOUSE, STOCKPLACE, TPLANT, TWAREHOUSE, TSTOCKPLACE, sw_tursec.isChecked(), "0" + edt_miktar.getText().toString());
-        }else {
-            urn = vt.getUrunListe(barkodTxt, COMPANY, "%","%", "%","%", "%", "%", false, "0" );
+        } else {
+            urn = vt.getUrunListe(barkodTxt, COMPANY, "%", "%", "%", "%", "%", "%", false, "0");
         }
         try {
             for (int i = 0; i < urn.size(); i++) {
                 if (!urn.get(i).getHATA().equals("0")) {
                     // ***************** hata var ise hatayı yaz
-                    hata_dlg("Palet / Ürün Bulma Hatası", urn.get(i).getHATATXT(),true);
+                    hata_dlg("Palet / Ürün Bulma Hatası", urn.get(i).getHATATXT(), true);
                     return;
                 } else {
                     //ITEMNUM,MATERIAL,MTEXT, SKQUANTITY, BOLUNEN,KALAN,HATA,HATATXT;
@@ -335,49 +342,50 @@ tv_tarih.setText(TARIH);
             Log.e("dataList", e.toString());
         }
         adapter.notifyDataSetChanged();
-        if (info==0){
+        if (info == 0) {
             transferkayit();
-        }else {
-            String ack =vt.getPaletBilgi(barkodTxt);
-            ack=ack+"";
-            if (!ack.equals("")){
-                int bas=0;
-                int bit=ack.indexOf("#",0);
-                String deg=ack.substring(bas,bit);
+        } else {
+            String ack = vt.getPaletBilgi(barkodTxt);
+            ack = ack + "";
+            if (!ack.equals("")) {
+                int bas = 0;
+                int bit = ack.indexOf("#", 0);
+                String deg = ack.substring(bas, bit);
                 tv_depo.setText(deg);
-                bas=bit+1;
-                bit=ack.indexOf("#",bas);
-                deg=ack.substring(bas,bit);
+                bas = bit + 1;
+                bit = ack.indexOf("#", bas);
+                deg = ack.substring(bas, bit);
                 tv_stokteri.setText(deg);
-                bas=bit+1;
-                bit=ack.length();
-                deg=ack.substring(bas,bit);
+                bas = bit + 1;
+                bit = ack.length();
+                deg = ack.substring(bas, bit);
                 tv_tesisadi.setText(deg);
             }
         }
         return;
     }
+
     protected void transferkayit() {
         // ************************canias transfer hareketi yap ******************************
-        HRKNUM=vt.HRKNUM;
-        String trsonuc= ias.palettransfer(barkodTxt,HRKNUM,COMPANY,PLANT,WAREHOUSE,STOCKPLACE,COMPANY,TPLANT,TWAREHOUSE,TSTOCKPLACE,PTUR,edt_miktar.getText().toString()+"",TARIH,BILTEKPARAM);
-        String hata ="";
-        hata=XMLdegeroku(trsonuc,"//TBLMSG/ROW/HATAKODU");
-        hata=hata+"";
+        HRKNUM = vt.HRKNUM;
+        String trsonuc = ias.palettransfer(barkodTxt, HRKNUM, COMPANY, PLANT, WAREHOUSE, STOCKPLACE, COMPANY, TPLANT, TWAREHOUSE, TSTOCKPLACE, PTUR, edt_miktar.getText().toString() + "", TARIH, BILTEKPARAM);
+        String hata = "";
+        hata = XMLdegeroku(trsonuc, "//TBLMSG/ROW/HATAKODU");
+        hata = hata + "";
         if (!hata.equals("0")) {
-            hata=XMLdegeroku(trsonuc,"//TBLMSG/ROW/HATATXT");
-            hata_dlg("Palet / Ürün Transfer",hata,true);
+            hata = XMLdegeroku(trsonuc, "//TBLMSG/ROW/HATATXT");
+            hata_dlg("Palet / Ürün Transfer", hata, true);
             return;
         }
         // *************************************************************************************
-        hata="Transfer işlemi gerçekleştirildi\n " +XMLdegeroku(trsonuc,"//TBLMSG/ROW/HATATXT");
-        hata_dlg("Palet / Ürün Transfer",hata,false);
+        hata = "Transfer işlemi gerçekleştirildi\n " + XMLdegeroku(trsonuc, "//TBLMSG/ROW/HATATXT");
+        hata_dlg("Palet / Ürün Transfer", hata, false);
         img_palet.startAnimation(animation);
         // img_palet.startAnimation(animation);
         return;
     }
 
-    protected void  hata_dlg(String baslik,String hatatxt,boolean ishata){
+    protected void hata_dlg(String baslik, String hatatxt, boolean ishata) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(baslik);
         builder.setMessage(hatatxt);
@@ -398,7 +406,7 @@ tv_tarih.setText(TARIH);
         alertDialog.getWindow().getAttributes().verticalMargin = 0.1F;
         if (ishata) {
             alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.holo_red_light);
-        }else {
+        } else {
             alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.holo_green_light);
 
         }
@@ -422,7 +430,7 @@ tv_tarih.setText(TARIH);
         return "";
     }
 
-    protected  String XMLdegeroku (String xmltxt, String root)  {
+    protected String XMLdegeroku(String xmltxt, String root) {
         DocumentBuilderFactory domFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
         try {
