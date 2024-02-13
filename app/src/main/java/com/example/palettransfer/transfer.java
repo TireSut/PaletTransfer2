@@ -129,8 +129,8 @@ public class transfer extends AppCompatActivity {
             return;
         }
         // Tanımlar
-        tv_kirmizidepo=findViewById(R.id.depokirmiziTextView);
-        tv_yesildepo=findViewById(R.id.depoyesilTextView);
+        tv_kirmizidepo = findViewById(R.id.depokirmiziTextView);
+        tv_yesildepo = findViewById(R.id.depoyesilTextView);
         tv_tarih = findViewById(R.id.tarih);
         btn_ara = findViewById(R.id.paletAraBtn);
         btn_tara = findViewById(R.id.paletTaramaBtn);
@@ -143,7 +143,7 @@ public class transfer extends AppCompatActivity {
         edt_miktar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                edt_miktar.setText(edt_miktar.getText().toString().replaceAll(",","."));
+                edt_miktar.setText(edt_miktar.getText().toString().replaceAll(",", "."));
             }
         });
         lbl_miktar = findViewById(R.id.miktarlbl);
@@ -200,8 +200,8 @@ public class transfer extends AppCompatActivity {
             animation.setRepeatMode(1);
             animation.setFillAfter(true);
             img_palet.startAnimation(animation);
-            tv_kirmizidepo.setText(WAREHOUSE+"/"+STOCKPLACE);
-            tv_yesildepo.setText(TWAREHOUSE+"/"+TSTOCKPLACE);
+            tv_kirmizidepo.setText(WAREHOUSE + "/" + STOCKPLACE);
+            tv_yesildepo.setText(TWAREHOUSE + "/" + TSTOCKPLACE);
 /*
             tv_depo.setText("Depo: [" + WAREHOUSE + "]  /  [" + TWAREHOUSE + "]");
             tv_stokteri.setText("Stok Yeri: [" + STOCKPLACE + "]  /  [" + TSTOCKPLACE + "]");
@@ -213,8 +213,8 @@ public class transfer extends AppCompatActivity {
             animation.setRepeatMode(1);
             animation.setFillAfter(true);
             img_palet.startAnimation(animation);
-            tv_yesildepo.setText(WAREHOUSE+"/"+STOCKPLACE);
-            tv_kirmizidepo.setText(TWAREHOUSE+"/"+TSTOCKPLACE);
+            tv_yesildepo.setText(WAREHOUSE + "/" + STOCKPLACE);
+            tv_kirmizidepo.setText(TWAREHOUSE + "/" + TSTOCKPLACE);
         }
 
         //   edt_barkod.setText("2109270101");
@@ -315,7 +315,7 @@ public class transfer extends AppCompatActivity {
             sw_tursec.setText(sw_tursec.getTextOn());
             lbl_miktar.setVisibility(View.VISIBLE);
             edt_miktar.setVisibility(View.VISIBLE);
-            edt_miktar.setText(barkodTxt.substring(12, 13) +barkodTxt.substring(7, 9) + "." + barkodTxt.substring(9, 11));
+            edt_miktar.setText(barkodTxt.substring(12, 13) + barkodTxt.substring(7, 9) + "." + barkodTxt.substring(9, 11));
             barkodTxt = barkodTxt.substring(0, 7);
         }
         double mik = Double.parseDouble("0" + edt_miktar.getText().toString());
