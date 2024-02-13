@@ -217,41 +217,87 @@
 
             </LinearLayout>
 
-            <RelativeLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp">
 
-                <RelativeLayout
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/depoanims"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:rowCount="1">
+                    android:layout_height="190dp"
+                    android:rowCount="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
 
                     <ImageView
                         android:id="@+id/kaynakdepoimg"
                         android:layout_width="150dp"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/sirket" />
+                        android:layout_height="150dp"
+                        android:background="@drawable/sirket"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
                         android:id="@+id/hedefdepoimg"
                         android:layout_width="150dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="150dp"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/sirket"
-                        android:backgroundTint="@color/kirmizi" />
+                        android:backgroundTint="@color/kirmizi"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageView
                         android:id="@+id/paletimg"
                         android:layout_width="70dp"
                         android:layout_height="60dp"
-                        android:layout_marginStart="38dp"
-                        android:layout_marginTop="76dp"
-                        android:background="@drawable/palet" />
-                </RelativeLayout>
-            </RelativeLayout>
+                        android:layout_marginTop="55dp"
+                        android:background="@drawable/palet"
+                        app:layout_constraintBottom_toBottomOf="@+id/kaynakdepoimg"
+                        app:layout_constraintEnd_toEndOf="@+id/kaynakdepoimg"
+                        app:layout_constraintStart_toStartOf="@+id/kaynakdepoimg"
+                        app:layout_constraintTop_toTopOf="@+id/kaynakdepoimg" />
+
+                    <TextView
+                        android:id="@+id/depoyesilTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="10dp"
+                        android:text="yesildepo"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/kaynakdepoimg"
+                        app:layout_constraintStart_toStartOf="@+id/kaynakdepoimg"
+                        app:layout_constraintTop_toBottomOf="@+id/kaynakdepoimg"
+                        tools:text="001" />
+
+                    <TextView
+                        android:id="@+id/depokirmiziTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginTop="10dp"
+                        android:text="kirmizidepo"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/hedefdepoimg"
+                        app:layout_constraintStart_toStartOf="@+id/hedefdepoimg"
+                        app:layout_constraintTop_toBottomOf="@+id/hedefdepoimg"
+                        tools:text="002"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:id="@+id/tarihlayout"

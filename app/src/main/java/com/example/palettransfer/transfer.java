@@ -5,18 +5,13 @@ import static java.lang.Thread.sleep;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.provider.Settings;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.TranslateAnimation;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -42,7 +37,6 @@ import org.xml.sax.SAXException;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -60,12 +54,12 @@ public class transfer extends AppCompatActivity {
     public String TPLANT, TPLANTTXT, TWAREHOUSE, TSTOCKPLACE, YON, HRKNUM, PTUR, TARIH, BILTEKPARAM, ATUR;
     int info;
     String etesis, edepo, esp;
-    TextView tv_tesisadi, tv_depo, tv_stokteri, lbl_miktar, tv_tarih;
+    TextView tv_tesisadi, tv_depo, tv_stokteri, lbl_miktar, tv_tarih, tv_yesildepo, tv_kirmizidepo;
     EditText edt_miktar, edt_barkod;
     public String barkodTxt;
     ImageButton btn_tara, btn_ara, btn_info, btn_exit;
     ImageView img_palet, img_kaynakdepo, img_hedefdepo;
-    TranslateAnimation animation = null;
+    public TranslateAnimation animation = null;
     RecyclerView recyclerView;
     public ArrayList<urunlist> nam = new ArrayList<>();
     public ArrayList<urunlist> urn = new ArrayList<>();
@@ -135,6 +129,8 @@ public class transfer extends AppCompatActivity {
             return;
         }
         // Tanımlar
+        tv_kirmizidepo=findViewById(R.id.depokirmiziTextView);
+        tv_yesildepo=findViewById(R.id.depoyesilTextView);
         tv_tarih = findViewById(R.id.tarih);
         btn_ara = findViewById(R.id.paletAraBtn);
         btn_tara = findViewById(R.id.paletTaramaBtn);
@@ -204,6 +200,12 @@ public class transfer extends AppCompatActivity {
             animation.setRepeatMode(1);
             animation.setFillAfter(true);
             img_palet.startAnimation(animation);
+            tv_kirmizidepo.setText(WAREHOUSE+"/"+STOCKPLACE);
+            tv_yesildepo.setText(TWAREHOUSE+"/"+TSTOCKPLACE);
+/*
+            tv_depo.setText("Depo: [" + WAREHOUSE + "]  /  [" + TWAREHOUSE + "]");
+            tv_stokteri.setText("Stok Yeri: [" + STOCKPLACE + "]  /  [" + TSTOCKPLACE + "]");
+  */
         } else {
             animation = new TranslateAnimation(0.0f, 420.0f, 0.0f, 0.0f);
             animation.setDuration(3000);
@@ -211,6 +213,8 @@ public class transfer extends AppCompatActivity {
             animation.setRepeatMode(1);
             animation.setFillAfter(true);
             img_palet.startAnimation(animation);
+            tv_yesildepo.setText(WAREHOUSE+"/"+STOCKPLACE);
+            tv_kirmizidepo.setText(TWAREHOUSE+"/"+TSTOCKPLACE);
         }
 
         //   edt_barkod.setText("2109270101");
