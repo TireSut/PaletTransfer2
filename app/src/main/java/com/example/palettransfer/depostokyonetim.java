@@ -55,7 +55,7 @@ public class depostokyonetim extends AppCompatActivity {
             WAREHOUSE = g.getCharSequence("WAREHOUSE").toString();
             STOCKPLACE = g.getCharSequence("STOCKPLACE").toString();
         }
-        if (AYARGRUP.equals("")) {
+        if ("".equals(AYARGRUP)) {
             return;
         }
         // Tanımlar

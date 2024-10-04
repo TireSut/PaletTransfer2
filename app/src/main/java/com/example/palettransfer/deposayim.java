@@ -242,7 +242,7 @@ public class deposayim extends AppCompatActivity {
         String trhtxt= TARIH.substring(6,10)+TARIH.substring(2,6)+TARIH.substring(0,2);
         // getUrunListe (String barkod, String comp,String pla,String wh, String sp,Boolean tur,int miktar)
         barkodTxt = edt_barkod.getText().toString();
-        if (barkodTxt.equals("")) {
+        if ("".equals(barkodTxt)) {
             return;
         }
         double mik = Double.parseDouble("0" + edt_miktar.getText().toString());
@@ -252,7 +252,7 @@ public class deposayim extends AppCompatActivity {
         }
         nam.clear();
         String hatatxt=vt.getSayimUrunBul (barkodTxt, COMPANY,PLANT,WAREHOUSE, STOCKPLACE,trhtxt,edt_miktar.getText().toString() ,sw_tursec.isChecked(),sayimsec.isChecked() ,0);
-          if (!hatatxt.equals("")){
+          if (!"".equals(hatatxt)){
               hata_dlg("Sayim",hatatxt,true);
         }
           dataList();
@@ -262,7 +262,7 @@ public class deposayim extends AppCompatActivity {
     public void satirsil(int pos){
         String trhtxt= TARIH.substring(6,10)+TARIH.substring(2,6)+TARIH.substring(0,2);
         String hatatxt = vt.setSayim(COMPANY,PLANT,WAREHOUSE,STOCKPLACE, trhtxt,adapter.msayimList.get(pos).getPALETNUM(),adapter.msayimList.get(pos).getMATERIAL(),adapter.msayimList.get(pos).getMTEXT(),"","0",Boolean.FALSE,Boolean.FALSE,1);
-        if (!hatatxt.equals("")){
+        if (!"".equals(hatatxt)){
             hata_dlg("Sayim",hatatxt,true);
         }
         return;

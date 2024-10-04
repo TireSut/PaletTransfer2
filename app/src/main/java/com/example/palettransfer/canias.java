@@ -37,7 +37,7 @@ public class canias {
 
     public String palettransfer(String strPltNum, String strHrkNum, String strCompany,String strPlant,String strWareHouse,String strStockPlace,String strCompanyT,String strPlantT,String strWareHouseT,String strStockPlaceT,String strPtur,String strMiktar,String strTarih, String strBiltek) {
         String strIsBiltek="0";
-        if (!strBiltek.equals("")) {strIsBiltek="8";}
+        if (!"".equals(strBiltek)) {strIsBiltek="8";}
         postparam = strPltNum+ "," + strHrkNum + "," + strCompany + "," + strPlant + "," + strWareHouse + "," + strStockPlace;
     postparam = postparam + "," + strCompanyT + "," + strPlantT + "," + strWareHouseT + "," + strStockPlaceT+","+strPtur+","+strMiktar+","+strTarih;
         postparam = postparam + "," +strIsBiltek + "," +strBiltek;

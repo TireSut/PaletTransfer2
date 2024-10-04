@@ -27,104 +27,123 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Formatter;
+import java.util.Objects;
+
+import android.widget.Toast; // Toast için gerekli import
+
 
 public class MainActivity extends AppCompatActivity {
-    public String AYARGRUP,COMPANY,PLANT,PLANTTXT,WAREHOUSE,STOCKPLACE,STOCKPLACETXT,TARIH,BILTEKPARAM,ATUR,YONETICI;
- TextView tv_cihazid,tv_cihazadi,tv_bilgiler,tarihTxt;
- ImageView btn_plttransfer,btn_pltbozma;
- ImageButton ayarbtn,btn_exit,takvimBtn,deposayim;
- VeriTabani vt =new VeriTabani();
-
-
+    public String AYARGRUP, COMPANY, PLANT, PLANTTXT, WAREHOUSE, STOCKPLACE, STOCKPLACETXT, TARIH, BILTEKPARAM, ATUR, YONETICI;
+    TextView tv_cihazid, tv_cihazadi, tv_bilgiler, tarihTxt;
+    ImageView btn_plttransfer, btn_pltbozma;
+    ImageButton ayarbtn, btn_exit, takvimBtn, deposayim;
+    VeriTabani vt = new VeriTabani();
 
 
     private static final String TAG = "MainActivity";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
     DecimalFormat numf = new DecimalFormat("00");
-public ArrayList<ayarlist> ayarlar = new ArrayList<>();
-int konum;
-String CIHAZID,CIHAZADI;
+    public ArrayList<ayarlist> ayarlar = new ArrayList<>();
+    int konum;
+    String CIHAZID, CIHAZADI;
+    // Geceyarısı kontrolü
+    private Handler handler;
+    private Runnable runnable;
     private Boolean EthernetAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                checkForMidnight();
+                handler.postDelayed(this, 60000); // 1 dakika sonra tekrar kontrol et
+            }
+        };
+
+
+        handler.post(runnable);
+
         setContentView(R.layout.activity_main);
-        tv_cihazid =findViewById(R.id.CIHAZIDTXT);
-        tv_cihazadi =findViewById(R.id.CIHAZADITXT);
-        tv_bilgiler =findViewById(R.id.bilgiler);
+        tv_cihazid = findViewById(R.id.CIHAZIDTXT);
+        tv_cihazadi = findViewById(R.id.CIHAZADITXT);
+        tv_bilgiler = findViewById(R.id.bilgiler);
         tarihTxt = findViewById(R.id.tarihTxt);
 
 
-        AYARGRUP="";
+        AYARGRUP = "";
 
         // cihaz ID al
-        CIHAZID=getDeviceUniqueID(this).toUpperCase();
+        CIHAZID = getDeviceUniqueID(this).toUpperCase();
         tv_cihazid.setText(CIHAZID);
-            CIHAZADI=vt.getAyarString("CIHAZ",CIHAZID,"ACIKLAMA");;
-            AYARGRUP=vt.getAyarString("CIHAZ",CIHAZID,"DEGER");;
-        if (AYARGRUP.equals("")){
-            vt.setCihazId(CIHAZID);
-            return;}
-        tv_cihazadi.setText(AYARGRUP+"- " +CIHAZADI);
+        CIHAZADI = vt.getAyarString("CIHAZ", CIHAZID, "ACIKLAMA");
+        ;
+        AYARGRUP = vt.getAyarString("CIHAZ", CIHAZID, "DEGER");
+        ;
+//        if (AYARGRUP==null || AYARGRUP.isEmpty()){
+//            vt.setCihazId(CIHAZID);
+//            tv_bilgiler.setText("Cihaz kaydı yok Bilgi İşlemle görüşün.");
+//            tv_cihazadi.setText("bilgiislem@tiresutkoop.org");
+//            return;}
+        tv_cihazadi.setText(AYARGRUP + "- " + CIHAZADI);
         // PRAMETRELERİ GETİR
-        COMPANY=vt.getAyarString(AYARGRUP,"COMPANY","DEGER");
-        PLANT=vt.getAyarString(AYARGRUP,"PLANT","DEGER");
-        PLANTTXT=vt.getTesisAdi(COMPANY,PLANT);
-        WAREHOUSE=vt.getAyarString(AYARGRUP,"WAREHOUSE","DEGER");
-        STOCKPLACE=vt.getAyarString(AYARGRUP,"STOCKPLACE","DEGER");
-        BILTEKPARAM=vt.getAyarString(AYARGRUP,"BILTEK","DEGER");
-        ATUR=vt.getAyarString(AYARGRUP,"TUR","DEGER");
-        if (ATUR.equals("")) {
-            ATUR="false";
+        COMPANY = vt.getAyarString(AYARGRUP, "COMPANY", "DEGER");
+        PLANT = vt.getAyarString(AYARGRUP, "PLANT", "DEGER");
+        PLANTTXT = vt.getTesisAdi(COMPANY, PLANT);
+        WAREHOUSE = vt.getAyarString(AYARGRUP, "WAREHOUSE", "DEGER");
+        STOCKPLACE = vt.getAyarString(AYARGRUP, "STOCKPLACE", "DEGER");
+        BILTEKPARAM = vt.getAyarString(AYARGRUP, "BILTEK", "DEGER");
+        ATUR = vt.getAyarString(AYARGRUP, "TUR", "DEGER");
+        if ("".equals(ATUR)) {
+            ATUR = "false";
         }
-        tv_bilgiler.setText(COMPANY+"-"+PLANT+"-"+WAREHOUSE+"-"+STOCKPLACE);
-        YONETICI=vt.getAyarString(AYARGRUP,"YONETICI","DEGER");
+        tv_bilgiler.setText(COMPANY + "-" + PLANT + "-" + WAREHOUSE + "-" + STOCKPLACE);
+        YONETICI = vt.getAyarString(AYARGRUP, "YONETICI", "DEGER");
         // yönetici ise yönetici ekranına git
-        if (YONETICI.equals("E")){
-            Intent intent = new Intent(MainActivity.this,depostokyonetim.class);
-            intent.putExtra("AYARGRUP",AYARGRUP );
-            intent.putExtra("COMPANY",COMPANY);
+        if ("E".equals(YONETICI)) {
+            Intent intent = new Intent(MainActivity.this, depostokyonetim.class);
+            intent.putExtra("AYARGRUP", AYARGRUP);
+            intent.putExtra("COMPANY", COMPANY);
             intent.putExtra("PLANT", PLANT);
             intent.putExtra("PLANTTXT", PLANTTXT);
-            intent.putExtra("WAREHOUSE",WAREHOUSE);
+            intent.putExtra("WAREHOUSE", WAREHOUSE);
             intent.putExtra("STOCKPLACE", STOCKPLACE);
             startActivity(intent);
             onBackPressed();
         }
 
-       // Ana DEpo Secim
-        ayarbtn=findViewById(R.id.ayarbtn);
+        // Ana DEpo Secim
+        ayarbtn = findViewById(R.id.ayarbtn);
         ayarbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,ana_depo_secim.class);
-                intent.putExtra("AYARGRUP",AYARGRUP );
-                intent.putExtra("COMPANY",COMPANY);
+                Intent intent = new Intent(MainActivity.this, ana_depo_secim.class);
+                intent.putExtra("AYARGRUP", AYARGRUP);
+                intent.putExtra("COMPANY", COMPANY);
                 intent.putExtra("PLANT", PLANT);
                 intent.putExtra("PLANTTXT", PLANTTXT);
-                intent.putExtra("WAREHOUSE",WAREHOUSE);
+                intent.putExtra("WAREHOUSE", WAREHOUSE);
                 intent.putExtra("STOCKPLACE", STOCKPLACE);
                 startActivity(intent);
-
 
 
             }
         });
 
 
-
-        deposayim=findViewById(R.id.deposayim);
+        deposayim = findViewById(R.id.deposayim);
         deposayim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,deposayim.class);
-                intent.putExtra("AYARGRUP",AYARGRUP );
-                intent.putExtra("COMPANY",COMPANY);
+                Intent intent = new Intent(MainActivity.this, deposayim.class);
+                intent.putExtra("AYARGRUP", AYARGRUP);
+                intent.putExtra("COMPANY", COMPANY);
                 intent.putExtra("PLANT", PLANT);
                 intent.putExtra("PLANTTXT", PLANTTXT);
-                intent.putExtra("WAREHOUSE",WAREHOUSE);
+                intent.putExtra("WAREHOUSE", WAREHOUSE);
                 intent.putExtra("STOCKPLACE", STOCKPLACE);
                 intent.putExtra("TARIH", TARIH);
                 intent.putExtra("ATUR", ATUR);
@@ -133,7 +152,7 @@ String CIHAZID,CIHAZADI;
         });
 
 
-        btn_exit=findViewById(R.id.exitbtn);
+        btn_exit = findViewById(R.id.exitbtn);
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,8 +166,9 @@ String CIHAZID,CIHAZADI;
         //int month = calendar.get(Calendar.MONTH);
         //int year = calendar.get(Calendar.YEAR);
 
-        TARIH=sdf.format(Calendar.getInstance().getTime());
-        takvimBtn=findViewById(R.id.takvimBtn);
+        TARIH = sdf.format(Calendar.getInstance().getTime());
+        tarihTxt.setText(TARIH);
+        takvimBtn = findViewById(R.id.takvimBtn);
         takvimBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -157,12 +177,8 @@ String CIHAZID,CIHAZADI;
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(
-                        MainActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateSetListener,
-                        year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                DatePickerDialog dialog = new DatePickerDialog(MainActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, month, day);
+                Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
         });
@@ -182,17 +198,17 @@ String CIHAZID,CIHAZADI;
         };
 
         // DEPOYA PALET GİRİŞ BUTONU
-        btn_plttransfer=findViewById(R.id.plttransfer);
+        btn_plttransfer = findViewById(R.id.plttransfer);
         btn_plttransfer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //AYARGRUP,COMPANY,PLANT,WAREHOUSE,STOCKPLACE
                 Intent intent = new Intent(getApplicationContext(), transfer_depo_secim.class);
-                intent.putExtra("AYARGRUP",AYARGRUP );
-                intent.putExtra("COMPANY",COMPANY);
+                intent.putExtra("AYARGRUP", AYARGRUP);
+                intent.putExtra("COMPANY", COMPANY);
                 intent.putExtra("PLANT", PLANT);
                 intent.putExtra("PLANTTXT", PLANTTXT);
-                intent.putExtra("WAREHOUSE",WAREHOUSE);
+                intent.putExtra("WAREHOUSE", WAREHOUSE);
                 intent.putExtra("STOCKPLACE", STOCKPLACE);
                 intent.putExtra("TARIH", TARIH);
                 intent.putExtra("BILTEKPARAM", BILTEKPARAM);
@@ -204,34 +220,47 @@ String CIHAZID,CIHAZADI;
     }
 
 
+    //private Handler mHandler = new Handler();
 
+//    private void startTime() {
+//        konum = 0;
+//        mHandler.removeCallbacks(mUpdateTimeTask);
+//        mHandler.postDelayed(mUpdateTimeTask, 100);
+//    }
 
-    private Handler mHandler = new Handler();
+//    private Runnable mUpdateTimeTask = new Runnable() {
+//        public void run() {
+//            // buraya ne yapmak istiyorsan o kodu yaz.. Kodun sonlandıktan sonra 1 saniye sonra tekrar çalışacak şekilde handler tekrar çalışacak.
+//            konum = konum + 10;
+//            if (konum > 500) {
+//                konum = 0;
+//            }
+//            mHandler.postDelayed(this, 100);
+//        }
+//    };
+private void checkForMidnight() {
+    Calendar calendar = Calendar.getInstance();
+    int hour = calendar.get(Calendar.HOUR_OF_DAY);
+    int minute = calendar.get(Calendar.MINUTE);
 
-    private void startTime() {
-        konum=0;
-        mHandler.removeCallbacks(mUpdateTimeTask);
-        mHandler.postDelayed(mUpdateTimeTask, 100);
+    // Eğer saat 00:00 ise
+    if (hour == 0 && minute == 0) {
+        TARIH = sdf.format(Calendar.getInstance().getTime());
+        tarihTxt.setText(TARIH);
+        Toast.makeText(this, "Saat 00:00 oldu, Tarih Güncellendi!", Toast.LENGTH_SHORT).show();
     }
-
-    private Runnable mUpdateTimeTask = new Runnable() {
-        public void run() {
-            // buraya ne yapmak istiyorsan o kodu yaz.. Kodun sonlandıktan sonra 1 saniye sonra tekrar çalışacak şekilde handler tekrar çalışacak.
-           konum=konum+10;
-           if (konum>500){
-               konum=0;
-           }
-            mHandler.postDelayed(this, 100);
-        }
-    };
-    public String getDeviceUniqueID(Activity activity){
-        String device_unique_id = Settings.Secure.getString(activity.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
+}
+    public String getDeviceUniqueID(Activity activity) {
+        String device_unique_id = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.ANDROID_ID);
         return device_unique_id;
     }
 
-   public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
 
-   }
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(runnable); // Uygulama kapandığında runnable durdurulur
+    }
 }

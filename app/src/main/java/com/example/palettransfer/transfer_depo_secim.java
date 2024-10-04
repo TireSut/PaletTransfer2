@@ -75,7 +75,7 @@ public class transfer_depo_secim extends AppCompatActivity {
             TWAREHOUSE = WAREHOUSE;
             TSTOCKPLACE = STOCKPLACE;
         }
-        if (AYARGRUP.equals("")) {
+        if ("".equals(AYARGRUP)) {
             return;
         }
         // Tanımlar

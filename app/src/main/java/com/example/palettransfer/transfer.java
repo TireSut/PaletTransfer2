@@ -125,7 +125,7 @@ public class transfer extends AppCompatActivity {
         });
 
 
-        if (AYARGRUP.equals("")) {
+        if ("".equals(AYARGRUP)) {
             return;
         }
         // Tanımlar
@@ -306,7 +306,7 @@ public class transfer extends AppCompatActivity {
         img_palet.clearAnimation();
         // getUrunListe (String barkod, String comp,String pla,String wh, String sp,Boolean tur,int miktar)
         barkodTxt = edt_barkod.getText().toString();
-        if (barkodTxt.equals("")) {
+        if ("".equals(barkodTxt)) {
             return;
         }
         if (barkodTxt.substring(0, 2).equals("27") || barkodTxt.substring(0, 2).equals("28")) {
@@ -349,8 +349,8 @@ public class transfer extends AppCompatActivity {
             transferkayit();
         } else {
             String ack = vt.getPaletBilgi(barkodTxt);
-            ack = ack + "";
-            if (!ack.equals("")) {
+//            ack = ack + "";
+            if (!ack.isEmpty()) {
                 int bas = 0;
                 int bit = ack.indexOf("#", 0);
                 String deg = ack.substring(bas, bit);
