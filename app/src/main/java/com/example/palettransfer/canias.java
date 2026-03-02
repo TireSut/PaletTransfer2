@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.sql.PreparedStatement;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -79,10 +80,11 @@ public class canias {
             return sourcecode;
         }
         //********************* işlemler ************************************
-        execurl=execurl.replace("puserid",userid);
-        execurl=execurl.replace("psrvname",srvname);
-        execurl=execurl.replace("pargs",ppostparam);
+
         try {
+            execurl=execurl.replace("puserid", URLEncoder.encode(userid, "UTF-8") );
+            execurl=execurl.replace("psrvname",URLEncoder.encode(srvname, "UTF-8"));
+            execurl=execurl.replace("pargs",URLEncoder.encode(ppostparam, "UTF-8"));
             HttpGet httpGet1 = new HttpGet(execurl);
             HttpResponse response1 = httpClient.execute(httpGet1, localContext);
             HttpEntity entity1 = response1.getEntity();
@@ -114,9 +116,9 @@ public class canias {
             return sourcecode;
         }
         //****************** çıkış *******************************************/
-        logouturl=logouturl.replace("puserid",userid);
-         httpGet = new HttpGet(logouturl);
         try {
+            logouturl=logouturl.replace("puserid",URLEncoder.encode(userid, "UTF-8"));
+            httpGet = new HttpGet(logouturl);
             HttpResponse response = httpClient.execute(httpGet, localContext);
          } catch (IOException e) {
             e.printStackTrace();
