@@ -96,7 +96,7 @@ public class ana_depo_secim extends AppCompatActivity {
     }
     public void dataList (){
         nam.clear();
-        dp =vt.getDepoListe(AYARGRUP, COMPANY, STOCKPLACE);
+        dp =vt.getDepoListe(AYARGRUP, COMPANY,WAREHOUSE, STOCKPLACE);
         try {
             for (int i = 0; i < dp.size() ; i++) {
                 nam.add(new depolist(dp.get(i).getPLA(),dp.get(i).getPLATXT(),dp.get(i).getWH(),dp.get(i).getWHTXT(),dp.get(i).getSP(),dp.get(i).getYON(),dp.get(i).getSPTXT()));

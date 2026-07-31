@@ -44,7 +44,7 @@ public class VeriTabani {
         return 0;
     }
 
-    public ArrayList<depolist> getDepoListe (String prg, String comp,String sp) {
+    public ArrayList<depolist> getDepoListe (String prg, String comp,String wh,String sp) {
         ArrayList<depolist> depoliste = new ArrayList<>();
         ResultSet rs=null;
         if (sqlBaglan() > 0) {
@@ -53,7 +53,7 @@ public class VeriTabani {
             sqltxt = sqltxt + " WHERE A.PRG='"+prg+"' AND A.PARAM='DEPO' AND SUBSTRING(A.DEGER,1,2)='"+comp+"' ";
             sqltxt = sqltxt + " AND P.CLIENT='00' AND P.COMPANY='"+comp+"' AND P.PLANT=SUBSTRING(A.DEGER,4,2) ";
             sqltxt = sqltxt + " AND D.CLIENT='00' AND D.COMPANY=P.COMPANY AND D.PLANT=P.PLANT AND D.WAREHOUSE=SUBSTRING(A.DEGER,7,3) ";
-            sqltxt = sqltxt + " AND SUBSTRING(A.DEGER,11,30)!='"+sp+"' ";
+            sqltxt = sqltxt + " AND SUBSTRING(A.DEGER,7,40)!='"+wh+"."+sp+"' ";
             sqltxt = sqltxt + " AND S.CLIENT=D.CLIENT AND S.COMPANY=D.COMPANY AND S.PLANT=D.PLANT AND S.WAREHOUSE=D.WAREHOUSE AND S.STOCKPLACE=SUBSTRING(A.DEGER,11,30) AND S.LANGU='T'; ";
 
             try {
