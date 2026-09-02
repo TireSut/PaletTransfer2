@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,8 +10,10 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="90dp"
+        android:layout_alignParentRight="true"
         android:layout_margin="3dp"
-        android:layout_alignParentRight="true">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/exitbtn"
@@ -25,11 +27,12 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="90dp"
-        android:layout_alignParentLeft="true"
         android:layout_marginStart="3dp"
         android:layout_marginTop="3dp"
         android:layout_marginEnd="3dp"
-        android:layout_marginBottom="3dp">
+        android:layout_marginBottom="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/takvimBtn"
@@ -41,303 +44,258 @@
     </RelativeLayout>
 
 
-    <LinearLayout
+    <ImageView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
+        android:layout_width="90dp"
         android:layout_height="90dp"
-        android:layout_centerHorizontal="true"
+        android:background="@drawable/logo1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        android:textAlignment="center">
 
-        <ImageView
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:background="@drawable/logo1" />
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/uygulamayazisi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/logo"
-
+        android:layout_weight="1"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:text="Palet Trasfer Uygulaması"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        android:visibility="gone"/>
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Palet Trasfer Uygulaması"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linear1"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CardVievMenüsü"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/logo"
         android:layout_marginTop="30dp"
-        android:orientation="vertical">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/uygulamayazisi">
 
-
-
-
-        <LinearLayout
-            android:id="@+id/linear3"
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flow1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linear2"
+            android:paddingHorizontal="10dp"
+            app:constraint_referenced_ids="kart1,kart2,kart33,kart44,kart5"
+            app:flow_horizontalGap="10dp"
+            app:flow_maxElementsWrap="2"
+            app:flow_verticalGap="10dp"
+            app:flow_wrapMode="aligned"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            android:layout_weight="1">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kart1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:foreground="@drawable/effect"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="30dp">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="@drawable/effect"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="30dp">
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="15dp">
 
-                <LinearLayout
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/plttransfer"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
-                        android:background="@drawable/palettransfer1"
-                        android:clickable="true"
-                        android:foreground="@drawable/effect" />
-
-                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/plttransfer"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/palettransfer1"
+                    android:clickable="true"
+                    android:foreground="@drawable/effect" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="105dp"
+                    android:layout_marginTop="8dp"
                     android:text="Palet Giriş"
                     android:textColor="#3F596B"
                     android:textSize="12sp"
                     android:textStyle="bold" />
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear4"
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kart2"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linear3"
+            android:clickable="true"
+            android:foreground="@drawable/effect"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="30dp">
 
-            android:layout_weight="1">
-
-            <androidx.cardview.widget.CardView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="95dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="@drawable/effect"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="15dp">
 
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="30dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/pltbozma"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@drawable/paletbozma_olusturma"
-                        android:clickable="true"
-                        android:foreground="@drawable/effect" />
-
-                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/pltbozma"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/paletbozma_olusturma"
+                    android:clickable="true"
+                    android:foreground="@drawable/effect" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="75dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
                     android:text="Palet Bozma-Oluşturma"
                     android:textColor="#3F596B"
                     android:textSize="12sp"
                     android:textStyle="bold" />
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kart33"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:foreground="@drawable/effect"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="30dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="@drawable/effect"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="30dp">
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="15dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/satissevkiyat"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@drawable/satis_sevkiyat"
-                        android:clickable="true"
-                        android:foreground="@drawable/effect" />
-
-
-                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/satissevkiyat"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/satis_sevkiyat"
+                    android:clickable="true"
+                    android:foreground="@drawable/effect" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="75dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
                     android:text="Satış Sevkiyat"
                     android:textColor="#3F596B"
                     android:textSize="12sp"
                     android:textStyle="bold" />
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-
-        </LinearLayout>
-
-
-        <LinearLayout
-
-            android:layout_width="match_parent"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kart44"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linear2"
+            android:clickable="true"
+            android:foreground="@drawable/effect"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="30dp">
 
-            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="15dp">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="95dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="@drawable/effect"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="30dp">
-
-                <LinearLayout
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/deposayim"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@drawable/deposayim"
-                        android:clickable="true"
-                        android:foreground="@drawable/effect" />
-
-                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/deposayim"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/deposayim"
+                    android:clickable="true"
+                    android:foreground="@drawable/effect" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="75dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
                     android:text="Depo Sayım"
                     android:textColor="#3F596B"
                     android:textSize="12sp"
                     android:textStyle="bold" />
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="95dp"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:foreground="@drawable/effect"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="30dp">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kart5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:foreground="@drawable/effect"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="30dp">
 
-                <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="15dp">
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center">
-
-                    <ImageButton
-                        android:id="@+id/ayarbtn"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:background="@drawable/warehouse"
-                        android:clickable="true"
-                        android:foreground="@drawable/effect" />
-
-                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/ayarbtn"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/warehouse"
+                    android:clickable="true"
+                    android:foreground="@drawable/effect" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="75dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
                     android:text="Ana Depo Seç"
                     android:textColor="#3F596B"
                     android:textSize="12sp"
                     android:textStyle="bold" />
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal">
-
-            <TextView
-                android:id="@+id/tarihTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-
-                android:text="Tarih"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
+    <TextView
+        android:id="@+id/tarihTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tarih"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/rl1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RelativeLayout
-
         android:id="@+id/rl1"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="NotSibling">
 
         <TextView
@@ -348,7 +306,8 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="UUIDUUID" />
 
         <TextView
             android:id="@+id/bilgiler"
@@ -358,7 +317,8 @@
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="01-01-011-SEVKİYAT" />
 
         <TextView
             android:id="@+id/CIHAZADITXT"
@@ -368,11 +328,8 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="15sp"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            tools:text="CİHAZADI" />
 
     </RelativeLayout>
-
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
