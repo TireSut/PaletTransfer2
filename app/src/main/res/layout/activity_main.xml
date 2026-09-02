@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
-            app:constraint_referenced_ids="kart1,kart2,kart33,kart44,kart5"
+            app:constraint_referenced_ids="kart1,kart2,kart33,kart44,kart5,kart6"
             app:flow_horizontalGap="10dp"
             app:flow_maxElementsWrap="2"
             app:flow_verticalGap="10dp"
@@ -266,6 +266,42 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="Ana Depo Seç"
+                    android:textColor="#3F596B"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/kart6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:foreground="@drawable/effect"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="30dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="15dp">
+
+                <ImageButton
+                    android:id="@+id/stoklarBtn"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/ic_stok"
+                    android:clickable="true"
+                    android:foreground="@drawable/effect" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Stokları Gör"
                     android:textColor="#3F596B"
                     android:textSize="12sp"
                     android:textStyle="bold" />
