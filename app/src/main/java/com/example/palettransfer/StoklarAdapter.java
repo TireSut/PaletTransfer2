@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
@@ -32,7 +34,18 @@ public class StoklarAdapter extends RecyclerView.Adapter<StoklarAdapter.ViewHold
         StokModel model = stokList.get(position);
         holder.tvMaterial.setText("Kod: " + model.getMaterial());
         holder.tvStext.setText(model.getStext());
-        holder.tvStok.setText(df.format(model.getStok()));
+        
+        double stok = model.getStok();
+        holder.tvStok.setText(df.format(stok));
+
+        CardView cardView = (CardView) holder.itemView;
+        if (stok >= -1 && stok <= 1) {
+            cardView.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.sari));
+        } else if (stok < 0) {
+            cardView.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.pembe1));
+        } else {
+            cardView.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.white));
+        }
     }
 
     @Override
