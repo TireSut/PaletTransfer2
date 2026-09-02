@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public String AYARGRUP, COMPANY, PLANT, PLANTTXT, WAREHOUSE, STOCKPLACE, STOCKPLACETXT, TARIH, BILTEKPARAM, ATUR, YONETICI;
     TextView tv_cihazid, tv_cihazadi, tv_bilgiler, tarihTxt;
     ImageView btn_plttransfer, btn_pltbozma;
+    ImageButton btn_stoklar;
     ImageButton ayarbtn, btn_exit, takvimBtn, deposayim;
     VeriTabani vt = new VeriTabani();
 
@@ -216,6 +217,22 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btn_stoklar = findViewById(R.id.stoklarBtn);
+        if(btn_stoklar != null) {
+            btn_stoklar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), StoklarActivity.class);
+                    intent.putExtra("COMPANY", COMPANY);
+                    intent.putExtra("PLANT", PLANT);
+                    intent.putExtra("PLANTTXT", PLANTTXT);
+                    intent.putExtra("WAREHOUSE", WAREHOUSE);
+                    intent.putExtra("STOCKPLACE", STOCKPLACE);
+                    startActivity(intent);
+                }
+            });
+        }
 
     }
 

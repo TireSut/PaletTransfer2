@@ -60,6 +60,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".transfer_depo_secim" />
+        <activity
+            android:name=".StoklarActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
