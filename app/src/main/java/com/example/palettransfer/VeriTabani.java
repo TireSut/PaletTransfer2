@@ -142,23 +142,69 @@ public class VeriTabani {
         return rtnstr;
     }
 
-    public String getTesisAdi(String comp, String pla) {
+//    public String getTesisAdi(String comp, String pla) {
+//        String rtnstr = "";
+//        ResultSet rs = null;
+//        if (sqlBaglan() > 0) {
+//            String sqltxt = "SELECT STEXT FROM IASBAS005 WHERE CLIENT='00' AND COMPANY='" + comp + "' AND PLANT='" + pla + "'";
+//            try {
+//                rs = query.executeQuery(sqltxt);
+//                while (rs.next()) {
+//                    rtnstr = rs.getString("STEXT");
+//                }
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return rtnstr;
+//    }
+    public String getTesisAdi2(String comp, String pla) {
+        String urlim = iotutl + "/getTesisAdi?comp="+comp+"&pla="+pla+"&token=7c5ff19030a756879f272ad3c1a1a7ed13960933b2f8e415ab84c42086727291";
         String rtnstr = "";
-        ResultSet rs = null;
-        if (sqlBaglan() > 0) {
-            String sqltxt = "SELECT STEXT FROM IASBAS005 WHERE CLIENT='00' AND COMPANY='" + comp + "' AND PLANT='" + pla + "'";
-            try {
-                rs = query.executeQuery(sqltxt);
-                while (rs.next()) {
-                    rtnstr = rs.getString("STEXT");
+
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            URL url = new URL(urlim);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                in.close();
+
+                String xmlResponse = response.toString();
+                int startIndex = xmlResponse.indexOf("<string");
+                if (startIndex != -1) {
+                    int closeBracketIndex = xmlResponse.indexOf(">", startIndex);
+                    int endIndex = xmlResponse.indexOf("</string>", closeBracketIndex);
+                    if (closeBracketIndex != -1 && endIndex != -1 && closeBracketIndex < endIndex) {
+                        rtnstr = xmlResponse.substring(closeBracketIndex + 1, endIndex);
+                    } else {
+                        rtnstr = "";
+                    }
+                } else {
+                    rtnstr = xmlResponse;
+                }
+            } else {
+                rtnstr = "#HTTP_HATA_" + responseCode;
             }
+        } catch (Exception e) {
+            Log.e("getTesisAdi2", "getTesisAdi2: "+e.getMessage());
+            rtnstr = "#HATA_" + e.getMessage();
         }
         return rtnstr;
     }
-
     public int getAutid() {
         int rtnint = 0;
         ResultSet rs = null;

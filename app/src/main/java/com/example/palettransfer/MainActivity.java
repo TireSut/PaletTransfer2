@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         // PRAMETRELERİ GETİR
         COMPANY = vt.getAyarString2(AYARGRUP, "COMPANY");
         PLANT = vt.getAyarString2(AYARGRUP, "PLANT");
-        PLANTTXT = vt.getTesisAdi(COMPANY, PLANT);
+        PLANTTXT = vt.getTesisAdi2(COMPANY, PLANT);
         WAREHOUSE = vt.getAyarString2(AYARGRUP, "WAREHOUSE");
         STOCKPLACE = vt.getAyarString2(AYARGRUP, "STOCKPLACE");
         BILTEKPARAM = vt.getAyarString2(AYARGRUP, "BILTEK");
