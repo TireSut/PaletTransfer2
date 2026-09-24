@@ -1,6 +1,8 @@
 package com.example.palettransfer;
 
-public class paletTuruList {
+import java.io.Serializable;
+
+public class paletTuruList implements Serializable {
     private int PALETTURU;
     private String PALETTURADI;
     private int HATAKODU;
