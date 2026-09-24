@@ -145,7 +145,7 @@
                 android:paddingVertical="15dp">
 
                 <ImageButton
-                    android:id="@+id/pltbozma"
+                    android:id="@+id/paletolusturyazdir"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:background="@drawable/paletbozma_olusturma"
@@ -157,7 +157,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="Palet Bozma-Oluşturma"
+                    android:text="Palet Oluşturma / Yazdırma"
                     android:textColor="#3F596B"
                     android:textSize="12sp"
                     android:textStyle="bold" />

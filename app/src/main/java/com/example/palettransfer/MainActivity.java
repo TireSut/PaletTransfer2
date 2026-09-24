@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_cihazid, tv_cihazadi, tv_bilgiler, tarihTxt;
     ImageView btn_plttransfer, btn_pltbozma;
     ImageButton btn_stoklar;
-    ImageButton ayarbtn, btn_exit, takvimBtn, deposayim;
+    ImageButton ayarbtn, btn_exit, takvimBtn, deposayim, paletolusturyazdir;
     VeriTabani vt = new VeriTabani();
 
 
@@ -197,6 +197,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
+
+        paletolusturyazdir = findViewById(R.id.paletolusturyazdir);
+        paletolusturyazdir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PaletOlusturmaActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // DEPOYA PALET GİRİŞ BUTONU
         btn_plttransfer = findViewById(R.id.plttransfer);
