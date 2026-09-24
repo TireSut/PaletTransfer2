@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.StrictMode;
 import android.renderscript.Script;
+import android.util.Log;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,6 +16,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class VeriTabani {
     public Connection conn;
@@ -89,8 +94,50 @@ public class VeriTabani {
     }
 
     public String getAyarString2(String prg, String param) {
-        String urlim = iotutl + "/iot/tsiotws.asmx/ayarlar?prg=" + prg + "&param=" + param + "&deger=&tip=0&token=232c923e5153a1bd431";
+        String urlim = iotutl + "/ayarlar?prg=" + prg + "&param=" + param + "&deger=&tip=0&token=232c923e5153a1bd431";
         String rtnstr = "";
+        
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            URL url = new URL(urlim);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                String xmlResponse = response.toString();
+                int startIndex = xmlResponse.indexOf("<string");
+                if (startIndex != -1) {
+                    int closeBracketIndex = xmlResponse.indexOf(">", startIndex);
+                    int endIndex = xmlResponse.indexOf("</string>", closeBracketIndex);
+                    if (closeBracketIndex != -1 && endIndex != -1 && closeBracketIndex < endIndex) {
+                        rtnstr = xmlResponse.substring(closeBracketIndex + 1, endIndex);
+                    } else {
+                        rtnstr = "";
+                    }
+                } else {
+                    rtnstr = xmlResponse;
+                }
+            } else {
+                rtnstr = "#HTTP_HATA_" + responseCode;
+            }
+        } catch (Exception e) {
+            Log.e("getAyarString2", "getAyarString2: "+e.getMessage());
+            rtnstr = "#HATA_" + e.getMessage();
+        }
 
         return rtnstr;
     }

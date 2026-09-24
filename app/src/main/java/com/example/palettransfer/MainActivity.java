@@ -80,9 +80,9 @@ public class MainActivity extends AppCompatActivity {
         // cihaz ID al
         CIHAZID = getDeviceUniqueID(this).toUpperCase();
         tv_cihazid.setText(CIHAZID);
-        CIHAZADI = vt.getAyarString("CIHAZ", CIHAZID, "ACIKLAMA");
+        CIHAZADI = vt.getAyarString2("CIHAZ", CIHAZID);
         ;
-        AYARGRUP = vt.getAyarString("CIHAZ", CIHAZID, "DEGER");
+        AYARGRUP = vt.getAyarString2("CIHAZ", CIHAZID);
         ;
 //        if (AYARGRUP==null || AYARGRUP.isEmpty()){
 //            vt.setCihazId(CIHAZID);
@@ -91,18 +91,18 @@ public class MainActivity extends AppCompatActivity {
 //            return;}
         tv_cihazadi.setText(AYARGRUP + "- " + CIHAZADI);
         // PRAMETRELERİ GETİR
-        COMPANY = vt.getAyarString(AYARGRUP, "COMPANY", "DEGER");
-        PLANT = vt.getAyarString(AYARGRUP, "PLANT", "DEGER");
+        COMPANY = vt.getAyarString2(AYARGRUP, "COMPANY");
+        PLANT = vt.getAyarString2(AYARGRUP, "PLANT");
         PLANTTXT = vt.getTesisAdi(COMPANY, PLANT);
-        WAREHOUSE = vt.getAyarString(AYARGRUP, "WAREHOUSE", "DEGER");
-        STOCKPLACE = vt.getAyarString(AYARGRUP, "STOCKPLACE", "DEGER");
-        BILTEKPARAM = vt.getAyarString(AYARGRUP, "BILTEK", "DEGER");
-        ATUR = vt.getAyarString(AYARGRUP, "TUR", "DEGER");
+        WAREHOUSE = vt.getAyarString2(AYARGRUP, "WAREHOUSE");
+        STOCKPLACE = vt.getAyarString2(AYARGRUP, "STOCKPLACE");
+        BILTEKPARAM = vt.getAyarString2(AYARGRUP, "BILTEK");
+        ATUR = vt.getAyarString2(AYARGRUP, "TUR");
         if ("".equals(ATUR)) {
             ATUR = "false";
         }
         tv_bilgiler.setText(COMPANY + "-" + PLANT + "-" + WAREHOUSE + "-" + STOCKPLACE);
-        YONETICI = vt.getAyarString(AYARGRUP, "YONETICI", "DEGER");
+        YONETICI = vt.getAyarString2(AYARGRUP, "YONETICI");
         // yönetici ise yönetici ekranına git
         if ("E".equals(YONETICI)) {
             Intent intent = new Intent(MainActivity.this, depostokyonetim.class);
