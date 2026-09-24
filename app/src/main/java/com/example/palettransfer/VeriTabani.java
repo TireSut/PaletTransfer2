@@ -8,6 +8,8 @@ import android.os.StrictMode;
 import android.renderscript.Script;
 import android.util.Log;
 
+import java.net.MalformedURLException;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -23,7 +26,7 @@ import java.net.URL;
 
 public class VeriTabani {
     public Connection conn;
-    public static String url = "jdbc:jtds:sqlserver://192.168.87.213/TIRESUT604;integratedSecurity=true";
+    //public static String url = "jdbc:jtds:sqlserver://192.168.87.213/TIRESUT604;integratedSecurity=true";
     public static String urltest = "jdbc:jtds:sqlserver://192.168.87.213/TEST802;integratedSecurity=true";
     public static String usr = "IAS";
     public static String pwd = "IAS";
@@ -39,6 +42,7 @@ public class VeriTabani {
     public int sqlBaglan() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        final String url = "jdbc:jtds:sqlserver://192.168.87.213/TIRESUT604;integratedSecurity=true";
         try {
             Class.forName(driver);
             conn = DriverManager.getConnection(url, usr, pwd);
@@ -96,7 +100,7 @@ public class VeriTabani {
     public String getAyarString2(String prg, String param) {
         String urlim = iotutl + "/ayarlar?prg=" + prg + "&param=" + param + "&deger=&tip=0&token=232c923e5153a1bd431";
         String rtnstr = "";
-        
+
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
@@ -135,14 +139,14 @@ public class VeriTabani {
                 rtnstr = "#HTTP_HATA_" + responseCode;
             }
         } catch (Exception e) {
-            Log.e("getAyarString2", "getAyarString2: "+e.getMessage());
+            Log.e("getAyarString2", "getAyarString2: " + e.getMessage());
             rtnstr = "#HATA_" + e.getMessage();
         }
 
         return rtnstr;
     }
 
-//    public String getTesisAdi(String comp, String pla) {
+    //    public String getTesisAdi(String comp, String pla) {
 //        String rtnstr = "";
 //        ResultSet rs = null;
 //        if (sqlBaglan() > 0) {
@@ -159,7 +163,7 @@ public class VeriTabani {
 //        return rtnstr;
 //    }
     public String getTesisAdi2(String comp, String pla) {
-        String urlim = iotutl + "/getTesisAdi?comp="+comp+"&pla="+pla+"&token=7c5ff19030a756879f272ad3c1a1a7ed13960933b2f8e415ab84c42086727291";
+        String urlim = iotutl + "/getTesisAdi?comp=" + comp + "&pla=" + pla + "&token=7c5ff19030a756879f272ad3c1a1a7ed13960933b2f8e415ab84c42086727291";
         String rtnstr = "";
 
         try {
@@ -200,12 +204,12 @@ public class VeriTabani {
                 rtnstr = "#HTTP_HATA_" + responseCode;
             }
         } catch (Exception e) {
-            Log.e("getTesisAdi2", "getTesisAdi2: "+e.getMessage());
+            Log.e("getTesisAdi2", "getTesisAdi2: " + e.getMessage());
             rtnstr = "#HATA_" + e.getMessage();
         }
         return rtnstr;
     }
-    public int getAutid() {
+ /*   public int getAutid() {
         int rtnint = 0;
         ResultSet rs = null;
         if (sqlBaglan() > 0) {
@@ -221,9 +225,9 @@ public class VeriTabani {
         }
         rtnint = rtnint + 1;
         return rtnint;
-    }
+    }*/
 
-    public void setCihazId(String CihazID) {
+ /*   public void setCihazId(String CihazID) {
         ResultSet rs = null;
         int autoid = getAutid();
         PreparedStatement ps;
@@ -243,27 +247,86 @@ public class VeriTabani {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
-    public void setAnaDepo(String agrp, String pla, String tpla, String wh, String twh, String sp, String tsp) {
-        ResultSet rs = null;
-        int autoid = getAutid();
-        PreparedStatement ps;
-        if (sqlBaglan() > 0) {
+//    public void setAnaDepo(String agrp, String pla, String tpla, String wh, String twh, String sp, String tsp) {
+//        ResultSet rs = null;
+//        // int autoid = getAutid();
+//        PreparedStatement ps;
+//        if (sqlBaglan() > 0) {
+//            try {
+//                String sqltxt = "UPDATE TIRAYARLAR SET DEGER='" + tpla + "' WHERE PRG='" + agrp + "' AND PARAM='PLANT' AND DEGER='" + pla + "' ";
+//                ps = conn.prepareStatement(sqltxt);
+//                int x = ps.executeUpdate();
+//                sqltxt = "UPDATE TIRAYARLAR SET DEGER='" + twh + "' WHERE PRG='" + agrp + "' AND PARAM='WAREHOUSE' AND DEGER='" + wh + "' ";
+//                ps = conn.prepareStatement(sqltxt);
+//                x = ps.executeUpdate();
+//                sqltxt = "UPDATE TIRAYARLAR SET DEGER='" + tsp + "' WHERE PRG='" + agrp + "' AND PARAM='STOCKPLACE' AND DEGER='" + sp + "' ";
+//                ps = conn.prepareStatement(sqltxt);
+//                x = ps.executeUpdate();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+
+    public void setAnaDepo2(String agrp, String pla, String tpla, String wh, String twh, String sp, String tsp) {
+        final String urlimfin = iotutl + "/setAyarlar?prg=#prg#&param=#param#&degerold=#degerold#&degernew=#degernew#&token=8ff4df2dea7ca044819a249e99ee86b3e8056c5b110cffd5f09ef37d0f5d2c8f";
+        String rtnstr = "";
+        ArrayList<URL> urller = new ArrayList<URL>();
+        try {
+            urller.add(new URL(urlimfin.replace("#degernew#", tpla).replace("#prg#", agrp).replace("#param#", "PLANT").replace("#degerold#", pla)));
+            urller.add(new URL(urlimfin.replace("#degernew#", twh).replace("#prg#", agrp).replace("#param#", "WAREHOUSE").replace("#degerold#", wh)));
+            urller.add(new URL(urlimfin.replace("#degernew#", tsp).replace("#prg#", agrp).replace("#param#", "STOCKPLACE").replace("#degerold#", sp)));
+        } catch (
+                MalformedURLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        for (URL urlx : urller
+        ) {
             try {
-                String sqltxt = "UPDATE TIRAYARLAR SET DEGER='" + tpla + "' WHERE PRG='" + agrp + "' AND PARAM='PLANT' AND DEGER='" + pla + "' ";
-                ps = conn.prepareStatement(sqltxt);
-                int x = ps.executeUpdate();
-                sqltxt = "UPDATE TIRAYARLAR SET DEGER='" + twh + "' WHERE PRG='" + agrp + "' AND PARAM='WAREHOUSE' AND DEGER='" + wh + "' ";
-                ps = conn.prepareStatement(sqltxt);
-                x = ps.executeUpdate();
-                sqltxt = "UPDATE TIRAYARLAR SET DEGER='" + tsp + "' WHERE PRG='" + agrp + "' AND PARAM='STOCKPLACE' AND DEGER='" + sp + "' ";
-                ps = conn.prepareStatement(sqltxt);
-                x = ps.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
+                HttpURLConnection conn = (HttpURLConnection) urlx.openConnection();
+                conn.setRequestMethod("GET");
+                conn.setReadTimeout(15000);
+                conn.setConnectTimeout(15000);
+
+                int responseCode = conn.getResponseCode();
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    String inputLine;
+                    StringBuilder response = new StringBuilder();
+
+                    while ((inputLine = in.readLine()) != null) {
+                        response.append(inputLine);
+                    }
+                    in.close();
+
+                    String xmlResponse = response.toString();
+                    int startIndex = xmlResponse.indexOf("<string");
+                    if (startIndex != -1) {
+                        int closeBracketIndex = xmlResponse.indexOf(">", startIndex);
+                        int endIndex = xmlResponse.indexOf("</string>", closeBracketIndex);
+                        if (closeBracketIndex != -1 && endIndex != -1 && closeBracketIndex < endIndex) {
+                            rtnstr = xmlResponse.substring(closeBracketIndex + 1, endIndex);
+                        } else {
+                            rtnstr = "";
+                        }
+                    } else {
+                        rtnstr = xmlResponse;
+                    }
+                } else {
+                    rtnstr = "#HTTP_HATA_" + responseCode;
+                }
+            } catch (
+                    Exception e) {
+                Log.e("setAnaDepo2", "setAnaDepo2: " + e.getMessage());
+                rtnstr = "#HATA_" + e.getMessage();
             }
         }
+        return;
     }
 
     public ArrayList<urunlist> getUrunListe(String barkod, String comp, String pla, String wh, String sp, String tpla, String twh, String tsp, Boolean tur, String miktar) {

@@ -50,7 +50,7 @@ public class ana_depoAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHold
                 TWAREHOUSE = mAnadepoList.get(position).getWH();
                 TSTOCKPLACE =mAnadepoList.get(position).getSP();
                 vt = new VeriTabani();
-                vt.setAnaDepo(AYARGRUP,PLANT,TPLANT,WAREHOUSE,TWAREHOUSE,STOCKPLACE,TSTOCKPLACE );
+                vt.setAnaDepo2(AYARGRUP,PLANT,TPLANT,WAREHOUSE,TWAREHOUSE,STOCKPLACE,TSTOCKPLACE );
                 Intent intent = new Intent(context.getApplicationContext(), MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 context.startActivity(intent);
