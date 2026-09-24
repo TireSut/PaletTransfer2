@@ -76,22 +76,22 @@ public class VeriTabani {
         return depoliste;
     }
 
-    public String getAyarString(String prg, String param, String alan) {
-        String rtnstr = "";
-        ResultSet rs = null;
-        if (sqlBaglan() > 0) {
-            String sqltxt = "SELECT PRG,PARAM,DEGER,ACIKLAMA   FROM TIRAYARLAR WHERE PRG='" + prg + "' AND PARAM='" + param + "'";
-            try {
-                rs = query.executeQuery(sqltxt);
-                while (rs.next()) {
-                    rtnstr = rs.getString(alan);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return rtnstr;
-    }
+//    public String getAyarString(String prg, String param, String alan) {
+//        String rtnstr = "";
+//        ResultSet rs = null;
+//        if (sqlBaglan() > 0) {
+//            String sqltxt = "SELECT PRG,PARAM,DEGER,ACIKLAMA   FROM TIRAYARLAR WHERE PRG='" + prg + "' AND PARAM='" + param + "'";
+//            try {
+//                rs = query.executeQuery(sqltxt);
+//                while (rs.next()) {
+//                    rtnstr = rs.getString(alan);
+//                }
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//        return rtnstr;
+//    }
 
     public String getAyarString2(String prg, String param) {
         String urlim = iotutl + "/ayarlar?prg=" + prg + "&param=" + param + "&deger=&tip=0&token=232c923e5153a1bd431";
