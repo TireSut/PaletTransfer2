@@ -44,4 +44,14 @@ public class paletTuruList {
     public void setHATATXT(String HATATXT) {
         this.HATATXT = HATATXT;
     }
+
+    @Override
+    public String toString() {
+        return "paletTuruList{" +
+                "PALETTURU=" + PALETTURU +
+                ", PALETTURADI='" + PALETTURADI + '\'' +
+                ", HATAKODU=" + HATAKODU +
+                ", HATATXT='" + HATATXT + '\'' +
+                '}';
+    }
 }
