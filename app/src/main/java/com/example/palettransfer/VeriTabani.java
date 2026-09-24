@@ -27,7 +27,7 @@ import java.net.URL;
 public class VeriTabani {
     public Connection conn;
     //public static String url = "jdbc:jtds:sqlserver://192.168.87.213/TIRESUT604;integratedSecurity=true";
-    public static String urltest = "jdbc:jtds:sqlserver://192.168.87.213/TEST802;integratedSecurity=true";
+    //public static String urltest = "jdbc:jtds:sqlserver://192.168.87.213/TEST802;integratedSecurity=true";
     public static String usr = "IAS";
     public static String pwd = "IAS";
     public static String driver = "net.sourceforge.jtds.jdbc.Driver";
@@ -97,7 +97,7 @@ public class VeriTabani {
 //        return rtnstr;
 //    }
 
-    public String getAyarString2(String prg, String param) {
+    public static String getAyarString2(String prg, String param) {
         String urlim = iotutl + "/ayarlar?prg=" + prg + "&param=" + param + "&deger=&tip=0&token=232c923e5153a1bd431";
         String rtnstr = "";
 
@@ -162,7 +162,7 @@ public class VeriTabani {
 //        }
 //        return rtnstr;
 //    }
-    public String getTesisAdi2(String comp, String pla) {
+    public static String getTesisAdi2(String comp, String pla) {
         String urlim = iotutl + "/getTesisAdi?comp=" + comp + "&pla=" + pla + "&token=7c5ff19030a756879f272ad3c1a1a7ed13960933b2f8e415ab84c42086727291";
         String rtnstr = "";
 
@@ -646,5 +646,8 @@ public class VeriTabani {
             }
         }
         return depoStok;
+    }
+    public static String getPALETYETKIGRUP(String CIHAZADI) {
+        return VeriTabani.getAyarString2(CIHAZADI, "PALETYETKIGRUP");
     }
 }
