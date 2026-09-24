@@ -650,4 +650,5 @@ public class VeriTabani {
     public static String getPALETYETKIGRUP(String CIHAZADI) {
         return VeriTabani.getAyarString2(CIHAZADI, "PALETYETKIGRUP");
     }
+
 }

@@ -203,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PaletOlusturmaActivity.class);
+                intent.putExtra("CIHAZADI", CIHAZADI);
                 startActivity(intent);
             }
         });

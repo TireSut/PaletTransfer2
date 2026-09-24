@@ -10,7 +10,8 @@ public class PaletOlusturmaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_palet_olusturma);
-        paletyetkigrubu=VeriTabani.getPALETYETKIGRUP("SUT1");
+        String cihazAdi = getIntent().getStringExtra("CIHAZADI");
+        paletyetkigrubu=VeriTabani.getPALETYETKIGRUP(cihazAdi);
         Log.i("PaletOlusturmaActivity", "paletyetkigrubu: "+paletyetkigrubu);
     }
 }
