@@ -651,4 +651,74 @@ public class VeriTabani {
         return VeriTabani.getAyarString2(CIHAZADI, "PALETYETKIGRUP");
     }
 
+    public static ArrayList<paletTuruList> getPaletTurleri(String yetkigrp) {
+        ArrayList<paletTuruList> list = new ArrayList<>();
+        String urlim = iotutl + "/paletturleri?yetkigrp=" + yetkigrp + "&token=56692571a12ec68ee493c35f2c0706bb69de74cbf209a5fc63fc7c3b1177439d";
+
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            URL url = new URL(urlim);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                org.xmlpull.v1.XmlPullParserFactory factory = org.xmlpull.v1.XmlPullParserFactory.newInstance();
+                factory.setNamespaceAware(true);
+                org.xmlpull.v1.XmlPullParser xpp = factory.newPullParser();
+
+                xpp.setInput(conn.getInputStream(), "UTF-8");
+
+                int eventType = xpp.getEventType();
+                paletTuruList currentItem = null;
+                String currentText = "";
+
+                while (eventType != org.xmlpull.v1.XmlPullParser.END_DOCUMENT) {
+                    String tagname = xpp.getName();
+                    switch (eventType) {
+                        case org.xmlpull.v1.XmlPullParser.START_TAG:
+                            if ("Table".equalsIgnoreCase(tagname)) {
+                                currentItem = new paletTuruList(0, "", 0, "");
+                            }
+                            break;
+                        case org.xmlpull.v1.XmlPullParser.TEXT:
+                            currentText = xpp.getText();
+                            break;
+                        case org.xmlpull.v1.XmlPullParser.END_TAG:
+                            if (currentItem != null) {
+                                if ("PALETTURU".equalsIgnoreCase(tagname)) {
+                                    if (!currentText.trim().isEmpty()) {
+                                        currentItem.setPALETTURU(Integer.parseInt(currentText.trim()));
+                                    }
+                                } else if ("PALETTURADI".equalsIgnoreCase(tagname)) {
+                                    currentItem.setPALETTURADI(currentText.trim());
+                                } else if ("HATAKODU".equalsIgnoreCase(tagname)) {
+                                    if (!currentText.trim().isEmpty()) {
+                                        currentItem.setHATAKODU(Integer.parseInt(currentText.trim()));
+                                    }
+                                } else if ("HATATXT".equalsIgnoreCase(tagname)) {
+                                    currentItem.setHATATXT(currentText.trim());
+                                } else if ("Table".equalsIgnoreCase(tagname)) {
+                                    list.add(currentItem);
+                                    currentItem = null;
+                                }
+                            }
+                            currentText = ""; // clear after tag ends
+                            break;
+                    }
+                    eventType = xpp.next();
+                }
+            } else {
+                Log.e("getPaletTurleri", "HTTP ERROR: " + responseCode);
+            }
+        } catch (Exception e) {
+            Log.e("getPaletTurleri", "Error: " + e.getMessage());
+        }
+
+        return list;
+    }
 }
