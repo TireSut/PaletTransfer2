@@ -204,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PaletOlusturmaActivity.class);
                 intent.putExtra("CIHAZADI", CIHAZADI);
+                intent.putExtra("COMPANY", COMPANY);
                 startActivity(intent);
             }
         });
@@ -229,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btn_stoklar = findViewById(R.id.stoklarBtn);
-        if(btn_stoklar != null) {
+        if (btn_stoklar != null) {
             btn_stoklar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -255,7 +256,7 @@ public class MainActivity extends AppCompatActivity {
 //        mHandler.postDelayed(mUpdateTimeTask, 100);
 //    }
 
-//    private Runnable mUpdateTimeTask = new Runnable() {
+    //    private Runnable mUpdateTimeTask = new Runnable() {
 //        public void run() {
 //            // buraya ne yapmak istiyorsan o kodu yaz.. Kodun sonlandıktan sonra 1 saniye sonra tekrar çalışacak şekilde handler tekrar çalışacak.
 //            konum = konum + 10;
@@ -265,18 +266,19 @@ public class MainActivity extends AppCompatActivity {
 //            mHandler.postDelayed(this, 100);
 //        }
 //    };
-private void checkForMidnight() {
-    Calendar calendar = Calendar.getInstance();
-    int hour = calendar.get(Calendar.HOUR_OF_DAY);
-    int minute = calendar.get(Calendar.MINUTE);
+    private void checkForMidnight() {
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
 
-    // Eğer saat 00:00 ise
-    if (hour == 0 && minute == 0) {
-        TARIH = sdf.format(Calendar.getInstance().getTime());
-        tarihTxt.setText(TARIH);
-        Toast.makeText(this, "Saat 00:00 oldu, Tarih Güncellendi!", Toast.LENGTH_SHORT).show();
+        // Eğer saat 00:00 ise
+        if (hour == 0 && minute == 0) {
+            TARIH = sdf.format(Calendar.getInstance().getTime());
+            tarihTxt.setText(TARIH);
+            Toast.makeText(this, "Saat 00:00 oldu, Tarih Güncellendi!", Toast.LENGTH_SHORT).show();
+        }
     }
-}
+
     public String getDeviceUniqueID(Activity activity) {
         String device_unique_id = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.ANDROID_ID);
         return device_unique_id;
@@ -286,6 +288,7 @@ private void checkForMidnight() {
         super.onBackPressed();
 
     }
+
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacks(runnable); // Uygulama kapandığında runnable durdurulur

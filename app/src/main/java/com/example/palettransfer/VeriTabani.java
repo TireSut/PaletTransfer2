@@ -651,9 +651,9 @@ public class VeriTabani {
         return VeriTabani.getAyarString2(CIHAZADI, "PALETYETKIGRUP");
     }
 
-    public static ArrayList<paletTuruList> getPaletTurleri(String yetkigrp) {
+    public static ArrayList<paletTuruList> getPaletTurleri(String company,String yetkigrp) {
         ArrayList<paletTuruList> list = new ArrayList<>();
-        String urlim = iotutl + "/paletturleri?yetkigrp=" + yetkigrp + "&token=56692571a12ec68ee493c35f2c0706bb69de74cbf209a5fc63fc7c3b1177439d";
+        String urlim = iotutl + "/paletturleri?comp="+company+"&yetkigrp=" + yetkigrp + "&token=56692571a12ec68ee493c35f2c0706bb69de74cbf209a5fc63fc7c3b1177439d";
 
         try {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -717,6 +717,72 @@ public class VeriTabani {
             }
         } catch (Exception e) {
             Log.e("getPaletTurleri", "Error: " + e.getMessage());
+        }
+
+        return list;
+    }
+    public static ArrayList<paletUrunGrubuList> getPaletUrunGrubu(String company,String yetkigrp, String palettur) {
+        ArrayList<paletUrunGrubuList> list = new ArrayList<>();
+        String urlim = iotutl + "/paleturungrup?comp="+company+"&yetkigrp=" + yetkigrp + "&palettur=" + palettur + "&token=12dfde91de97540d2ff23baf8e718ef5a141724dbe4249b28429c4a47e7cc4c3";
+
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            URL url = new URL(urlim);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                org.xmlpull.v1.XmlPullParserFactory factory = org.xmlpull.v1.XmlPullParserFactory.newInstance();
+                factory.setNamespaceAware(true);
+                org.xmlpull.v1.XmlPullParser xpp = factory.newPullParser();
+
+                xpp.setInput(conn.getInputStream(), "UTF-8");
+
+                int eventType = xpp.getEventType();
+                paletUrunGrubuList currentItem = null;
+                String currentText = "";
+
+                while (eventType != org.xmlpull.v1.XmlPullParser.END_DOCUMENT) {
+                    String tagname = xpp.getName();
+                    switch (eventType) {
+                        case org.xmlpull.v1.XmlPullParser.START_TAG:
+                            if ("Table".equalsIgnoreCase(tagname)) {
+                                currentItem = new paletUrunGrubuList("", 0, "");
+                            }
+                            break;
+                        case org.xmlpull.v1.XmlPullParser.TEXT:
+                            currentText = xpp.getText();
+                            break;
+                        case org.xmlpull.v1.XmlPullParser.END_TAG:
+                            if (currentItem != null) {
+                                if ("URUNGRP".equalsIgnoreCase(tagname)) {
+                                    currentItem.setURUNGRP(currentText.trim());
+                                } else if ("HATAKODU".equalsIgnoreCase(tagname)) {
+                                    if (!currentText.trim().isEmpty()) {
+                                        currentItem.setHATAKODU(Integer.parseInt(currentText.trim()));
+                                    }
+                                } else if ("HATATXT".equalsIgnoreCase(tagname)) {
+                                    currentItem.setHATATXT(currentText.trim());
+                                } else if ("Table".equalsIgnoreCase(tagname)) {
+                                    list.add(currentItem);
+                                    currentItem = null;
+                                }
+                            }
+                            currentText = "";
+                            break;
+                    }
+                    eventType = xpp.next();
+                }
+            } else {
+                Log.e("getPaletUrunGrubu", "HTTP ERROR: " + responseCode);
+            }
+        } catch (Exception e) {
+            Log.e("getPaletUrunGrubu", "Error: " + e.getMessage());
         }
 
         return list;
