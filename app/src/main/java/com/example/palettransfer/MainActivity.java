@@ -4,29 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.StrictMode;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Formatter;
 import java.util.Objects;
 
 import android.widget.Toast; // Toast için gerekli import
@@ -202,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
         paletolusturyazdir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, PaletOlusturmaActivity.class);
+                Intent intent = new Intent(MainActivity.this, PaletSecimiActivity.class);
                 intent.putExtra("CIHAZADI", CIHAZADI);
                 intent.putExtra("COMPANY", COMPANY);
                 startActivity(intent);

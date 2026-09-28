@@ -11,13 +11,13 @@ import android.content.Intent;
 
 import java.util.ArrayList;
 
-public class PaletOlusturmaActivity extends AppCompatActivity {
+public class PaletSecimiActivity extends AppCompatActivity {
     String paletyetkigrubu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_palet_olusturma);
+        setContentView(R.layout.activity_palet_secimi);
         String cihazAdi = getIntent().getStringExtra("CIHAZADI");
         String company = getIntent().getStringExtra("COMPANY");
         paletyetkigrubu = VeriTabani.getPALETYETKIGRUP(cihazAdi);
@@ -32,7 +32,7 @@ public class PaletOlusturmaActivity extends AppCompatActivity {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(PaletOlusturmaActivity.this, PaletIcinUrunGrubuSecActivity.class);
+                    Intent intent = new Intent(PaletSecimiActivity.this, PaletIcinUrunGrubuSecActivity.class);
                     intent.putExtra("paletTuru", ee);
                     intent.putExtra("COMPANY", company);
                     intent.putExtra("CIHAZADI", cihazAdi);
