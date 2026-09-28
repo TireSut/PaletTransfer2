@@ -787,4 +787,78 @@ public class VeriTabani {
 
         return list;
     }
+    public static ArrayList<paletUrunlerList> getPaletUrunler(String yetkigrp, String palettur, String urungrp) {
+        ArrayList<paletUrunlerList> list = new ArrayList<>();
+        String urlim = "";
+        try {
+            String encodedUrunGrp = java.net.URLEncoder.encode(urungrp, "UTF-8");
+            urlim = iotutl + "/paletUrunler?yetkigrp=" + yetkigrp + "&palettur=" + palettur + "&urungrp=" + encodedUrunGrp + "&token=72b62d376a61c8ee8b67ffb9bc3e6ecee9c6439746425a008ddfd489c0260954";
+        } catch (Exception e) {
+             urlim = iotutl + "/paletUrunler?yetkigrp=" + yetkigrp + "&palettur=" + palettur + "&urungrp=" + urungrp + "&token=72b62d376a61c8ee8b67ffb9bc3e6ecee9c6439746425a008ddfd489c0260954";
+        }
+
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            URL url = new URL(urlim);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                org.xmlpull.v1.XmlPullParserFactory factory = org.xmlpull.v1.XmlPullParserFactory.newInstance();
+                factory.setNamespaceAware(true);
+                org.xmlpull.v1.XmlPullParser xpp = factory.newPullParser();
+
+                xpp.setInput(conn.getInputStream(), "UTF-8");
+
+                int eventType = xpp.getEventType();
+                paletUrunlerList currentItem = null;
+                String currentText = "";
+
+                while (eventType != org.xmlpull.v1.XmlPullParser.END_DOCUMENT) {
+                    String tagname = xpp.getName();
+                    switch (eventType) {
+                        case org.xmlpull.v1.XmlPullParser.START_TAG:
+                            if ("Table".equalsIgnoreCase(tagname)) {
+                                currentItem = new paletUrunlerList("", "", 0, "");
+                            }
+                            break;
+                        case org.xmlpull.v1.XmlPullParser.TEXT:
+                            currentText = xpp.getText();
+                            break;
+                        case org.xmlpull.v1.XmlPullParser.END_TAG:
+                            if (currentItem != null) {
+                                if ("MATERIAL".equalsIgnoreCase(tagname) || "URUNKODU".equalsIgnoreCase(tagname)) {
+                                    currentItem.setMATERIAL(currentText.trim());
+                                } else if ("MTEXT".equalsIgnoreCase(tagname) || "URUNADI".equalsIgnoreCase(tagname)) {
+                                    currentItem.setMTEXT(currentText.trim());
+                                } else if ("HATAKODU".equalsIgnoreCase(tagname)) {
+                                    if (!currentText.trim().isEmpty()) {
+                                        currentItem.setHATAKODU(Integer.parseInt(currentText.trim()));
+                                    }
+                                } else if ("HATATXT".equalsIgnoreCase(tagname)) {
+                                    currentItem.setHATATXT(currentText.trim());
+                                } else if ("Table".equalsIgnoreCase(tagname)) {
+                                    list.add(currentItem);
+                                    currentItem = null;
+                                }
+                            }
+                            currentText = "";
+                            break;
+                    }
+                    eventType = xpp.next();
+                }
+            } else {
+                Log.e("getPaletUrunler", "HTTP ERROR: " + responseCode);
+            }
+        } catch (Exception e) {
+            Log.e("getPaletUrunler", "Error: " + e.getMessage());
+        }
+
+        return list;
+    }
 }

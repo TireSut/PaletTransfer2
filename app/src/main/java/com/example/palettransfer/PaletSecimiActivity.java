@@ -36,6 +36,7 @@ public class PaletSecimiActivity extends AppCompatActivity {
                     intent.putExtra("paletTuru", ee);
                     intent.putExtra("COMPANY", company);
                     intent.putExtra("CIHAZADI", cihazAdi);
+                    intent.putExtra("paletyetkigrubu", paletyetkigrubu);
                     startActivity(intent);
                 }
             });
