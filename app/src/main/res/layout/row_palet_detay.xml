@@ -1,41 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rowContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@android:color/white">
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:padding="8dp"
+    android:gravity="center_vertical"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/tvIndex"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="20sp"
+        android:textColor="#333333"/>
+
+    <View android:layout_width="1dp" android:layout_height="match_parent" android:background="#d3d3d3" android:layout_marginEnd="8dp"/>
 
     <TextView
         android:id="@+id/tvMText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Ürün Adı"
-        android:textSize="18sp"
+        android:layout_weight="1"
+        android:text="TS AYRAN 1LT"
+        android:textSize="20sp"
+        android:textColor="#0000FF" />
+
+    <View android:layout_width="1dp" android:layout_height="match_parent" android:background="#d3d3d3" android:layout_marginStart="8dp" android:layout_marginEnd="8dp"/>
+
+    <EditText
+        android:id="@+id/etYmiktar"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:text="480"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#333333" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="8dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Miktar:"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="8dp"/>
-
-        <EditText
-            android:id="@+id/etYmiktar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="numberDecimal"
-            android:hint="0.0" />
-            
-    </LinearLayout>
-
+        android:textColor="#FF0000"
+        android:gravity="end"
+        android:background="@null"
+        android:padding="4dp"/>
 </LinearLayout>

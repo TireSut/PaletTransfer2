@@ -938,6 +938,14 @@ public class VeriTabani {
                                     currentItem.setHATAKODU(currentText.trim());
                                 } else if ("HATATXT".equalsIgnoreCase(tagname)) {
                                     currentItem.setHATATXT(currentText.trim());
+                                } else if ("SKTGUN".equalsIgnoreCase(tagname)) {
+                                    if (!currentText.trim().isEmpty()) {
+                                        try {
+                                            currentItem.setSKTGUN((int) Double.parseDouble(currentText.trim()));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
                                 } else if ("Table".equalsIgnoreCase(tagname) || "hata".equalsIgnoreCase(tagname)) {
                                     list.add(currentItem);
                                     currentItem = null;
@@ -956,5 +964,90 @@ public class VeriTabani {
         }
 
         return list;
+    }
+
+    public static paletBaslikList getPaletBaslik(String comp, String yetkigrp, String palettur, String urungrp, String pltad, String token) {
+        paletBaslikList result = new paletBaslikList();
+        String urlim = "";
+        try {
+            String encodedUrunGrp = java.net.URLEncoder.encode(urungrp, "UTF-8");
+            String encodedPltAd = java.net.URLEncoder.encode(pltad, "UTF-8");
+            urlim = iotutl + "/paletBaslik?comp=" + comp + "&yetkigrp=" + yetkigrp + "&palettur=" + palettur + "&urungrp=" + encodedUrunGrp + "&pltad=" + encodedPltAd + "&token=" + token;
+        } catch (Exception e) {
+            urlim = iotutl + "/paletBaslik?comp=" + comp + "&yetkigrp=" + yetkigrp + "&palettur=" + palettur + "&urungrp=" + urungrp + "&pltad=" + pltad + "&token=" + token;
+        }
+
+        try {
+            android.os.StrictMode.ThreadPolicy policy = new android.os.StrictMode.ThreadPolicy.Builder().permitAll().build();
+            android.os.StrictMode.setThreadPolicy(policy);
+
+            java.net.URL url = new java.net.URL(urlim);
+            java.net.HttpURLConnection conn = (java.net.HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+
+            int responseCode = conn.getResponseCode();
+            if (responseCode == java.net.HttpURLConnection.HTTP_OK) {
+                org.xmlpull.v1.XmlPullParserFactory factory = org.xmlpull.v1.XmlPullParserFactory.newInstance();
+                factory.setNamespaceAware(true);
+                org.xmlpull.v1.XmlPullParser xpp = factory.newPullParser();
+
+                xpp.setInput(conn.getInputStream(), "UTF-8");
+
+                int eventType = xpp.getEventType();
+                String currentText = "";
+
+                while (eventType != org.xmlpull.v1.XmlPullParser.END_DOCUMENT) {
+                    String tagname = xpp.getName();
+                    switch (eventType) {
+                        case org.xmlpull.v1.XmlPullParser.TEXT:
+                            currentText = xpp.getText();
+                            break;
+                        case org.xmlpull.v1.XmlPullParser.END_TAG:
+                            if ("PALETADI".equalsIgnoreCase(tagname)) {
+                                result.setPALETADI(currentText.trim());
+                            } else if ("URUNGRP".equalsIgnoreCase(tagname)) {
+                                result.setURUNGRP(currentText.trim());
+                            } else if ("YETKIGRP".equalsIgnoreCase(tagname)) {
+                                result.setYETKIGRP(currentText.trim());
+                            } else if ("SKTGUN".equalsIgnoreCase(tagname)) {
+                                if (!currentText.trim().isEmpty()) {
+                                    try {
+                                        result.setSKTGUN((int) Double.parseDouble(currentText.trim()));
+                                    } catch (Exception e) { e.printStackTrace(); }
+                                }
+                            } else if ("ETIKETNAME".equalsIgnoreCase(tagname)) {
+                                result.setETIKETNAME(currentText.trim());
+                            } else if ("PARTNAME".equalsIgnoreCase(tagname)) {
+                                result.setPARTNAME(currentText.trim());
+                            } else if ("SKTARTI1".equalsIgnoreCase(tagname)) {
+                                if (!currentText.trim().isEmpty()) {
+                                    try { result.setSKTARTI1(Integer.parseInt(currentText.trim())); } catch (Exception e) {}
+                                }
+                            } else if ("SKTARTI1GUN".equalsIgnoreCase(tagname)) {
+                                if (!currentText.trim().isEmpty()) {
+                                    try { result.setSKTARTI1GUN(Integer.parseInt(currentText.trim())); } catch (Exception e) {}
+                                }
+                            } else if ("HATAKODU".equalsIgnoreCase(tagname)) {
+                                if (!currentText.trim().isEmpty()) {
+                                    try { result.setHATAKODU(Integer.parseInt(currentText.trim())); } catch (Exception e) {}
+                                }
+                            } else if ("HATATXT".equalsIgnoreCase(tagname)) {
+                                result.setHATATXT(currentText.trim());
+                            }
+                            currentText = "";
+                            break;
+                    }
+                    eventType = xpp.next();
+                }
+            } else {
+                android.util.Log.e("getPaletBaslik", "HTTP ERROR: " + responseCode);
+            }
+        } catch (Exception e) {
+            android.util.Log.e("getPaletBaslik", "Error: " + e.getMessage());
+        }
+
+        return result;
     }
 }

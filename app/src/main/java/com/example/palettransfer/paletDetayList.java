@@ -13,6 +13,7 @@ public class paletDetayList implements Serializable {
     private int ISIRSALIYE;
     private int ISTOCK;
     private double YMIKTAR;
+    private int SKTGUN;
 
     public paletDetayList(String MATERIAL, String MTEXT, double PALETMIKTAR, double URUNMIKTAR) {
         this.MATERIAL = MATERIAL;
@@ -25,6 +26,7 @@ public class paletDetayList implements Serializable {
         this.ISIRSALIYE = 0;
         this.ISTOCK = 0;
         this.YMIKTAR = 0.0;
+        this.SKTGUN = 0;
     }
 
     public int getSTOCKTYPE() {
@@ -105,5 +107,13 @@ public class paletDetayList implements Serializable {
 
     public void setURUNMIKTAR(double URUNMIKTAR) {
         this.URUNMIKTAR = URUNMIKTAR;
+    }
+
+    public int getSKTGUN() {
+        return SKTGUN;
+    }
+
+    public void setSKTGUN(int SKTGUN) {
+        this.SKTGUN = SKTGUN;
     }
 }
