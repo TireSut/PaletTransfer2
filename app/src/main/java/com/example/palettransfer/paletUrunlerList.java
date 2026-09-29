@@ -3,32 +3,22 @@ package com.example.palettransfer;
 import java.io.Serializable;
 
 public class paletUrunlerList implements Serializable {
-    private String MATERIAL;
-    private String MTEXT;
+    private String PALETADI;
     private int HATAKODU;
     private String HATATXT;
 
-    public paletUrunlerList(String MATERIAL, String MTEXT, int HATAKODU, String HATATXT) {
-        this.MATERIAL = MATERIAL;
-        this.MTEXT = MTEXT;
+    public paletUrunlerList(String PALETADI, int HATAKODU, String HATATXT) {
+        this.PALETADI = PALETADI;
         this.HATAKODU = HATAKODU;
         this.HATATXT = HATATXT;
     }
 
-    public String getMATERIAL() {
-        return MATERIAL;
+    public String getPALETADI() {
+        return PALETADI;
     }
 
-    public void setMATERIAL(String MATERIAL) {
-        this.MATERIAL = MATERIAL;
-    }
-
-    public String getMTEXT() {
-        return MTEXT;
-    }
-
-    public void setMTEXT(String MTEXT) {
-        this.MTEXT = MTEXT;
+    public void setPALETADI(String PALETADI) {
+        this.PALETADI = PALETADI;
     }
 
     public int getHATAKODU() {
@@ -50,8 +40,7 @@ public class paletUrunlerList implements Serializable {
     @Override
     public String toString() {
         return "paletUrunlerList{" +
-                "MATERIAL='" + MATERIAL + '\'' +
-                ", MTEXT='" + MTEXT + '\'' +
+                "PALETADI='" + PALETADI + '\'' +
                 ", HATAKODU=" + HATAKODU +
                 ", HATATXT='" + HATATXT + '\'' +
                 '}';

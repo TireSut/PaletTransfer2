@@ -43,12 +43,12 @@ public class PaletIcinUrunSecActivity extends AppCompatActivity {
                         continue;
                     }
                     Button btn = new Button(this);
-                    String btnText = urun.getMTEXT() != null && !urun.getMTEXT().isEmpty() ? urun.getMTEXT() : urun.getMATERIAL();
+                    String btnText = urun.getPALETADI() != null ? urun.getPALETADI() : "";
                     btn.setText(btnText);
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Log.i("Urun", "Secilen Urun: " + urun.getMATERIAL() + " - " + urun.getMTEXT());
+                            Log.i("Urun", "Secilen Urun: " + urun.getPALETADI());
                             // İleriki adımlar için bu obje kullanılacak
                         }
                     });

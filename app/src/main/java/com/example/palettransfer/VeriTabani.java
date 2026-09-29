@@ -824,7 +824,7 @@ public class VeriTabani {
                     switch (eventType) {
                         case org.xmlpull.v1.XmlPullParser.START_TAG:
                             if ("Table".equalsIgnoreCase(tagname)) {
-                                currentItem = new paletUrunlerList("", "", 0, "");
+                                currentItem = new paletUrunlerList("", 0, "");
                             }
                             break;
                         case org.xmlpull.v1.XmlPullParser.TEXT:
@@ -832,10 +832,8 @@ public class VeriTabani {
                             break;
                         case org.xmlpull.v1.XmlPullParser.END_TAG:
                             if (currentItem != null) {
-                                if ("MATERIAL".equalsIgnoreCase(tagname) || "URUNKODU".equalsIgnoreCase(tagname)) {
-                                    currentItem.setMATERIAL(currentText.trim());
-                                } else if ("MTEXT".equalsIgnoreCase(tagname) || "URUNADI".equalsIgnoreCase(tagname)) {
-                                    currentItem.setMTEXT(currentText.trim());
+                                if ("PALETADI".equalsIgnoreCase(tagname)) {
+                                    currentItem.setPALETADI(currentText.trim());
                                 } else if ("HATAKODU".equalsIgnoreCase(tagname)) {
                                     if (!currentText.trim().isEmpty()) {
                                         currentItem.setHATAKODU(Integer.parseInt(currentText.trim()));
