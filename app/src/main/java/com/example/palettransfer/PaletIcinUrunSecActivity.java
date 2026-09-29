@@ -49,7 +49,14 @@ public class PaletIcinUrunSecActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             Log.i("Urun", "Secilen Urun: " + urun.getPALETADI());
-                            // İleriki adımlar için bu obje kullanılacak
+                            Intent i = new Intent(PaletIcinUrunSecActivity.this, PaletOlusturmaActivity.class);
+                            i.putExtra("CIHAZADI", cihazadi);
+                            i.putExtra("COMPANY", company);
+                            i.putExtra("paletyetkigrubu", paletyetkigrubu);
+                            i.putExtra("paletTuru", paletTuru);
+                            i.putExtra("urunGrubu", urunGrubu);
+                            i.putExtra("paletUrun", urun);
+                            startActivity(i);
                         }
                     });
                     buttonContainer.addView(btn);
