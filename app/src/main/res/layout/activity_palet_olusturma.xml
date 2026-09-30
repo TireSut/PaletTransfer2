@@ -1,26 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#f4f4f4">
+    android:background="#f4f4f4"
+    android:padding="8dp">
 
-    <TextView
+    <!-- Tarih -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Palet Oluşturma"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Tarih"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"/>
+
+        <EditText
+            android:id="@+id/etTarih"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/edit_text"
+            android:focusable="false"
+            android:clickable="true"
+            android:drawableEnd="@android:drawable/ic_menu_today"
+            android:padding="8dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"/>
+    </LinearLayout>
+
+    <!-- S.K.T. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="S.K.T."
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"/>
+
+        <EditText
+            android:id="@+id/etSKT"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:drawable/edit_text"
+            android:focusable="false"
+            android:clickable="true"
+            android:drawableEnd="@android:drawable/ic_menu_today"
+            android:padding="8dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"/>
+
+        <CheckBox
+            android:id="@+id/cbPlusOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+1"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Parti No (Green Box) -->
+    <TextView
+        android:id="@+id/tvPartiNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ccffcc"
+        android:text="4002PA26"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="#333333"
         android:gravity="center"
-        android:padding="16dp"
-        android:background="@android:color/white"
-        android:elevation="4dp"/>
+        android:padding="8dp"
+        android:layout_marginBottom="8dp"/>
 
+    <!-- Plt. Sayısı (Pink Box) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#ff99cc"
+            android:text="Plt.Sayısı"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:padding="8dp"/>
+            
+        <View android:layout_width="2dp" android:layout_height="match_parent" android:background="#ffffff"/>
+
+        <EditText
+            android:id="@+id/tvPltSayisi"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:background="#ff99cc"
+            android:text="1"
+            android:inputType="number"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#333333"
+            android:gravity="end"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+    <!-- Save Button -->
+    <ImageButton
+        android:id="@+id/btnKaydet"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#8B0000"
+        android:src="@android:drawable/ic_menu_save"
+        android:scaleType="fitCenter"
+        android:tint="#333333"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Satır Sil Button -->
+    <LinearLayout
+        android:id="@+id/btnSatirSil"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:background="#ffff99"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginBottom="8dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_delete"
+            app:tint="#333333" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Satır Sil"
+            android:textColor="#333333"
+            android:textSize="22sp"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
+
+    <!-- Table Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#d3d3d3"
+        android:padding="4dp">
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:text=""/>
+        <View android:layout_width="1dp" android:layout_height="match_parent" android:background="#a9a9a9"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="MTEXT"
+            android:paddingStart="4dp"
+            android:textSize="14sp"/>
+        <View android:layout_width="1dp" android:layout_height="match_parent" android:background="#a9a9a9"/>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="PALETMIKTAR"
+            android:gravity="center"
+            android:textSize="14sp"/>
+    </LinearLayout>
+    
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="8dp">
+        android:background="@android:color/white">
 
         <LinearLayout
             android:id="@+id/llUrunlerContainer"
@@ -28,14 +202,5 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
-
-    <Button
-        android:id="@+id/btnPaletiOlustur"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Oluştur / İleri"
-        android:layout_margin="16dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:textColor="@android:color/white"/>
 
 </LinearLayout>
